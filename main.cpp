@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#define kVel 3
+#define kVel 4
 
 int main()
 {
@@ -26,7 +26,9 @@ int main()
     
     int xd = 0, yd = 0, xu = 0, ys = 0;
     int yu = 4, xs = 4;
-    bool bs = false, bu = false, bd = false;
+    
+    sf::Clock clock;
+    
     //Bucle del juego
     while (window.isOpen())
     {
@@ -50,51 +52,51 @@ int main()
                         
                         //Mapeo del cursor
                         case sf::Keyboard::Right:
-                            if(bs == true){
+                            if(clock.getElapsedTime().asSeconds() > 0.07f){
                                 if(xs < 8) xs++;
                                 if(ys < 4) ys++;
                                 if(xs > 7) xs = 4;
                                 if(ys > 3) ys = 0;
-                                bs = false;
-                            }else{bs = true;}
+                                clock.restart();
+                            }
                             sprite.setTextureRect(sf::IntRect(xs*64, ys*64, 64, 64));
                             sprite.setScale(-1,1);
                             sprite.move(kVel,0);
                         break;
 
                         case sf::Keyboard::Left:
-                                if(bs == true){
+                            if(clock.getElapsedTime().asSeconds() > 0.07f){
                                 if(xs < 8) xs++;
                                 if(ys < 4) ys++;
                                 if(xs > 7) xs = 4;
                                 if(ys > 3) ys = 0;
-                            bs = false;
-                            }else{bs = true;}
+                                clock.restart();
+                            }
                             sprite.setTextureRect(sf::IntRect(xs*64, ys*64, 64, 64));
                             sprite.setScale(1,1);
                             sprite.move(-kVel,0); 
                         break;
                         
                         case sf::Keyboard::Up:
-                                if(bu == true){
+                            if(clock.getElapsedTime().asSeconds() > 0.07f){
                                 if(xu < 4) xu++;
                                 if(yu < 8) yu++;
                                 if(xu > 3) xu = 0;
                                 if(yu > 7) yu = 4;
-                                bu = false;
-                            }else{bu = true;}
+                                clock.restart();
+                            }
                             sprite.setTextureRect(sf::IntRect(xu*64, yu*64, 64, 64));
                             sprite.move(0,-kVel); 
                         break;
                         
                         case sf::Keyboard::Down:
-                            if(bd == true){
+                            if(clock.getElapsedTime().asSeconds() > 0.07f){
                                 if(xd < 4) xd++;
                                 if(yd < 4) yd++; 
                                 if(xd > 3) xd = 0;
                                 if(yd > 3) yd = 0;
-                                bd = false;
-                            }else{bd = true;}
+                                clock.restart();
+                            }
                             sprite.setTextureRect(sf::IntRect(xd*64, yd*64, 64, 64));
                             sprite.move(0,kVel); 
                         break;
