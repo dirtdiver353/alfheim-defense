@@ -4,8 +4,11 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Estado.h</itemPath>
+      <itemPath>EstadoInGame.h</itemPath>
+      <itemPath>EstadoJuego.h</itemPath>
       <itemPath>Juego.h</itemPath>
-      <itemPath>Jugador.h</itemPath>
+      <itemPath>Personaje.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -14,6 +17,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>EstadoInGame.cpp</itemPath>
+      <itemPath>EstadoJuego.cpp</itemPath>
+      <itemPath>Juego.cpp</itemPath>
+      <itemPath>Personaje.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -38,6 +45,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
+          <commandlineTool>g++ -std=c++0x</commandlineTool>
           <incDir>
             <pElem>/usr/include/SFML</pElem>
           </incDir>
@@ -53,9 +61,23 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="Estado.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoInGame.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoInGame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoJuego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoJuego.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Jugador.h" ex="false" tool="3" flavor2="0">
+      <item path="Personaje.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Personaje.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -80,9 +102,23 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Estado.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoInGame.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoInGame.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="EstadoJuego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="EstadoJuego.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Jugador.h" ex="false" tool="3" flavor2="0">
+      <item path="Personaje.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Personaje.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

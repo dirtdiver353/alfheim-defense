@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=cppapplication_3
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/cppapplication_3
+CND_ARTIFACT_NAME_Debug=alfheimprueba
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/alfheimprueba
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=cppapplication3.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/cppapplication3.tar
+CND_PACKAGE_NAME_Debug=alfheimprueba.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/alfheimprueba.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=cppapplication_3
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/cppapplication_3
+CND_ARTIFACT_NAME_Release=alfheimprueba
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/alfheimprueba
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=cppapplication3.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/cppapplication3.tar
+CND_PACKAGE_NAME_Release=alfheimprueba.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/alfheimprueba.tar
 #
 # include compiler specific variables
 #
