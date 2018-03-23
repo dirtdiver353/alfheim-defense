@@ -4,7 +4,7 @@
 #include "EstadoInGame.h"
 #include <iostream>
 
-namespace Galaga
+namespace Alfheim
 {
    
        EstadoInGame::EstadoInGame(DatosJuegoRef datos) : _datos(datos)

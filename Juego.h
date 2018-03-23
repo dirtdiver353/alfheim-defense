@@ -6,7 +6,7 @@
 #include "EstadoJuego.h"
 
 
-namespace Galaga
+namespace Alfheim
 {
     struct DatosJuego
     {

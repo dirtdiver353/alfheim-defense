@@ -1,7 +1,7 @@
 //Esta seria la 'maquina de estados' para añadir, cambiar estado...
 #include "EstadoJuego.h"
 
-namespace Galaga
+namespace Alfheim
 {
     void EstadoJuego::AddEJ(EstadoJuegoRef nuevoEJ, bool reemplaza)
     {

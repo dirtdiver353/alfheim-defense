@@ -5,7 +5,7 @@
 #include "Juego.h"
 #include "Personaje.h"
 
-namespace Galaga
+namespace Alfheim
 {
     class EstadoInGame : public Estado
     {

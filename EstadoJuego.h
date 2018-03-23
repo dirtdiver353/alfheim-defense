@@ -6,7 +6,7 @@
 
 #include "Estado.h"
 
-namespace Galaga
+namespace Alfheim
 {
     typedef std::unique_ptr <Estado> EstadoJuegoRef;
     

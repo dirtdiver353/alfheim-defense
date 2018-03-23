@@ -1,6 +1,6 @@
 #include "Personaje.h"
 
-namespace Galaga{
+namespace Alfheim{
     
 
 Personaje::Personaje(DatosJuegoRef datos) : _datos(datos) {
