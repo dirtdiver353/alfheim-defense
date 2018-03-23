@@ -26,22 +26,15 @@ void Personaje::Pintar()
 
 void Personaje::Girar(int dl, int x, int y)
 {
-    
     int kVel = 4;
-   // if(clock.getElapsedTime().asSeconds() > 0.1f){ 
         
-    if(dl != 3){
+        if(dl == 1) {_personaje.move(kVel,0); _personaje.setScale(-1,1);}
+        if(dl == 2) {_personaje.move(-kVel,0); _personaje.setScale(1,1);}
+        if(dl == 3) {_personaje.move(0,-kVel); }
+        if(dl == 4) {_personaje.move(0,kVel); }
         
-        if(dl == 4) _personaje.move(0,kVel); 
-        if(dl == 1) _personaje.move(kVel,0); _personaje.setScale(-1,1);
-        if(dl == 2) _personaje.move(-kVel,0);
-    }if(dl == 3){
-        
-        _personaje.move(0,-kVel); 
-    }
-    
     _personaje.setTextureRect(sf::IntRect(x*64, y*64, 64, 64));
-    //clock.restart();}     
+
 }
 
 void Personaje::Update(float dt)

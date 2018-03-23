@@ -26,9 +26,7 @@ namespace Galaga
         
         void EstadoInGame::ManejarEventos()
         {
-            int xd = 0, yd = 0, xu = 0, ys = 0;
-            int yu = 4, xs = 4;
-            sf::Clock clock;
+           
                      
             sf::Event event;
             while(_datos->ventana.pollEvent(event))
@@ -45,26 +43,47 @@ namespace Galaga
                     switch(event.key.code) {
                         
                         case sf::Keyboard::Right:
-                            if(clock.getElapsedTime().asSeconds() > 0.1f){
+                            if(pasos.getElapsedTime().asSeconds() > 0.1f){
                                 if(xs < 8) xs++;
                                 if(xs > 7) xs = 4;
                                 if(ys < 4) ys++;                                
                                 if(ys > 3) ys = 0;
-                                clock.restart();
+                                pasos.restart();
                             }
                             personaje->Girar(1,xs,ys);
                         break;
 
                         case sf::Keyboard::Left:
-                            personaje->Girar(2,4,0);
+                            if(pasos.getElapsedTime().asSeconds() > 0.07f){
+                                  if(xs < 8) xs++;
+                                  if(ys < 4) ys++;
+                                  if(xs > 7) xs = 4;
+                                  if(ys > 3) ys = 0;
+                                  pasos.restart();
+                            }
+                            personaje->Girar(2,xs,ys);
                         break;
                         
                         case sf::Keyboard::Up:
-                            personaje->Girar(3,0,4);
+                            if(pasos.getElapsedTime().asSeconds() > 0.07f){
+                                  if(xu < 4) xu++;
+                                  if(yu < 8) yu++;
+                                  if(xu > 3) xu = 0;
+                                  if(yu > 7) yu = 4;
+                                  pasos.restart();
+                            }
+                            personaje->Girar(3,xu,yu);
                         break;
                         
                         case sf::Keyboard::Down:
-                            personaje->Girar(4,0,0);
+                            if(pasos.getElapsedTime().asSeconds() > 0.07f){
+                                  if(xd < 4) xd++;
+                                  if(yd < 4) yd++; 
+                                  if(xd > 3) xd = 0;
+                                  if(yd > 3) yd = 0;
+                                  pasos.restart();
+                            }
+                            personaje->Girar(4,xd,yd);
                         break;
                         
                         case sf::Keyboard::Escape:
