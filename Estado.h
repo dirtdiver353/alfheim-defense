@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Alfheim
+namespace Galaga
 {
     class Estado
     {

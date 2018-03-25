@@ -4,23 +4,18 @@
 #include "EstadoInGame.h"
 #include <iostream>
 
-namespace Alfheim
+namespace Galaga
 {
    
        EstadoInGame::EstadoInGame(DatosJuegoRef datos) : _datos(datos)
        {
-           
-            if (!_backgroundTexture.loadFromFile("resources/outer.png"))
-            {
-                std::cerr << "Error cargando la imagen fondo.png";
-                exit(0);
-            }    
             
-            _background.setTexture(_backgroundTexture);
+            
        }
         
         void EstadoInGame::Init()
         {
+            map = new Map(_datos);
             personaje = new Personaje(_datos);
         }
         
@@ -40,9 +35,7 @@ namespace Alfheim
                 
                 case sf::Event::KeyPressed:
                    
-                    switch(event.key.code) {
-                        
-                        case sf::Keyboard::Right:
+                    if(event.key.code == sf::Keyboard::Right){
                             if(pasos.getElapsedTime().asSeconds() > 0.1f){
                                 if(xs < 8) xs++;
                                 if(xs > 7) xs = 4;
@@ -51,9 +44,9 @@ namespace Alfheim
                                 pasos.restart();
                             }
                             personaje->Girar(1,xs,ys);
-                        break;
-
-                        case sf::Keyboard::Left:
+                    }
+                    
+                     if(event.key.code == sf::Keyboard::Left){
                             if(pasos.getElapsedTime().asSeconds() > 0.07f){
                                   if(xs < 8) xs++;
                                   if(ys < 4) ys++;
@@ -62,9 +55,9 @@ namespace Alfheim
                                   pasos.restart();
                             }
                             personaje->Girar(2,xs,ys);
-                        break;
+                     }
                         
-                        case sf::Keyboard::Up:
+                     if(event.key.code ==  sf::Keyboard::Up){
                             if(pasos.getElapsedTime().asSeconds() > 0.07f){
                                   if(xu < 4) xu++;
                                   if(yu < 8) yu++;
@@ -73,9 +66,9 @@ namespace Alfheim
                                   pasos.restart();
                             }
                             personaje->Girar(3,xu,yu);
-                        break;
+                     }
                         
-                        case sf::Keyboard::Down:
+                       if(event.key.code ==  sf::Keyboard::Down){
                             if(pasos.getElapsedTime().asSeconds() > 0.07f){
                                   if(xd < 4) xd++;
                                   if(yd < 4) yd++; 
@@ -84,19 +77,13 @@ namespace Alfheim
                                   pasos.restart();
                             }
                             personaje->Girar(4,xd,yd);
-                        break;
+                       }
                         
-                        case sf::Keyboard::Escape:
+                       if(event.key.code == sf::Keyboard::Escape)
                             _datos->ventana.close();
-                        break;
-                       
-                        default:
-                            std::cout << event.key.code << std::endl;
-                        break;
-                              
-                    }
-
-                }
+                    
+                    break;
+            }        
             }
         }
         void EstadoInGame::Update(float dt)
@@ -109,8 +96,8 @@ namespace Alfheim
         void EstadoInGame::Render(float dt)
         {
             _datos->ventana.clear();
-            _datos->ventana.draw(_background);
-            personaje->Pintar(); 
+            map->Pintar();  
+            personaje->Pintar();             
             _datos->ventana.display();
         }
         

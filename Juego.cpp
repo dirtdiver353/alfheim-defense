@@ -2,7 +2,7 @@
 #include "Juego.h"
 #include "EstadoInGame.h"
 
-namespace Alfheim
+namespace Galaga
 {
     
 

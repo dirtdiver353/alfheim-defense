@@ -4,8 +4,10 @@
 #include "Estado.h"
 #include "Juego.h"
 #include "Personaje.h"
+#include "Map.h"
 
-namespace Alfheim
+
+namespace Galaga
 {
     class EstadoInGame : public Estado
     {
@@ -21,12 +23,13 @@ namespace Alfheim
     private:
         DatosJuegoRef _datos;
         sf::Clock _clock;
-        sf::Texture _backgroundTexture;
-        sf::Sprite _background;
+        //sf::Texture _backgroundTexture;
+        //sf::Sprite _background;  
+        Map *map;              
         Personaje *personaje;
         int xd = 0, yd = 0, xu = 0, ys = 0;
         int yu = 4, xs = 4;
-        sf::Clock pasos;
+        sf::Clock pasos; 
         
     };
 }

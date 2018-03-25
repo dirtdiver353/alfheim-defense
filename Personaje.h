@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Juego.h"
 
-namespace Alfheim
+namespace Galaga
 {
 
     class Personaje
