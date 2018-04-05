@@ -4,14 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>Estado.h</itemPath>
-      <itemPath>EstadoInGame.h</itemPath>
-      <itemPath>EstadoJuego.h</itemPath>
+      <itemPath>InGame.h</itemPath>
       <itemPath>Juego.h</itemPath>
-      <itemPath>Map.h</itemPath>
+      <itemPath>JuegoState.h</itemPath>
+      <itemPath>Menu.h</itemPath>
+      <itemPath>Musica.hpp</itemPath>
       <itemPath>Personaje.h</itemPath>
-      <itemPath>tinystr.h</itemPath>
-      <itemPath>tinyxml.h</itemPath>
+      <itemPath>State.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -20,14 +19,14 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>EstadoInGame.cpp</itemPath>
-      <itemPath>EstadoJuego.cpp</itemPath>
+      <itemPath>InGame.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
-      <itemPath>Map.cpp</itemPath>
+      <itemPath>JuegoState.cpp</itemPath>
+      <itemPath>Menu.cpp</itemPath>
+      <itemPath>Musica.cpp</itemPath>
       <itemPath>Personaje.cpp</itemPath>
+      <itemPath>../tron_fv/clacon.ttf</itemPath>
       <itemPath>main.cpp</itemPath>
-      <itemPath>tinystr.cpp</itemPath>
-      <itemPath>tinyxml.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -41,9 +40,6 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
-  <sourceRootList>
-    <Elem>tinyxml</Elem>
-  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -54,8 +50,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <standard>8</standard>
-          <commandlineTool>g++ -std=c++0x</commandlineTool>
+          <commandlineTool>g++ -std=c++11</commandlineTool>
           <incDir>
             <pElem>/usr/include/SFML</pElem>
           </incDir>
@@ -65,43 +60,43 @@
             <pElem>/usr/lib/x86_64-linux-gnu</pElem>
           </linkerAddLib>
           <linkerLibItems>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-audio.so</linkerLibFileItem>
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-graphics.so</linkerLibFileItem>
+            <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-network.so</linkerLibFileItem>
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-system.so</linkerLibFileItem>
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-window.so</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="Estado.h" ex="false" tool="3" flavor2="0">
+      <item path="../tron_fv/clacon.ttf" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="EstadoInGame.cpp" ex="false" tool="1" flavor2="0">
+      <item path="InGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="EstadoInGame.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="EstadoJuego.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="EstadoJuego.h" ex="false" tool="3" flavor2="0">
+      <item path="InGame.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Map.cpp" ex="false" tool="1" flavor2="0">
+      <item path="JuegoState.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Map.h" ex="false" tool="3" flavor2="0">
+      <item path="JuegoState.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Menu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Musica.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Musica.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Personaje.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Personaje.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="State.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="tinystr.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="tinystr.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="tinyxml.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="tinyxml.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -124,37 +119,35 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Estado.h" ex="false" tool="3" flavor2="0">
+      <item path="../tron_fv/clacon.ttf" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="EstadoInGame.cpp" ex="false" tool="1" flavor2="0">
+      <item path="InGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="EstadoInGame.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="EstadoJuego.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="EstadoJuego.h" ex="false" tool="3" flavor2="0">
+      <item path="InGame.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Juego.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Juego.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Map.cpp" ex="false" tool="1" flavor2="0">
+      <item path="JuegoState.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Map.h" ex="false" tool="3" flavor2="0">
+      <item path="JuegoState.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Menu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Menu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Musica.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Musica.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Personaje.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Personaje.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="State.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="tinystr.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="tinystr.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="tinyxml.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="tinyxml.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

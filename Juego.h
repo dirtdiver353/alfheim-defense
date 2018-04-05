@@ -3,14 +3,14 @@
 #include <memory>
 #include <string>
 #include <SFML/Graphics.hpp>
-#include "EstadoJuego.h"
+#include "JuegoState.h"
 
 
-namespace Galaga
+namespace Alfheim
 {
     struct DatosJuego
     {
-        EstadoJuego estado;
+        JuegoState state;
         sf::RenderWindow ventana;
     };   
     typedef std::shared_ptr<DatosJuego> DatosJuegoRef;

@@ -1,25 +1,30 @@
 #pragma once
 
 #include <sstream>
-#include "EstadoInGame.h"
+#include "InGame.h"
 #include <iostream>
 
-namespace Galaga
+namespace Alfheim
 {
    
-       EstadoInGame::EstadoInGame(DatosJuegoRef datos) : _datos(datos)
+       InGame::InGame(DatosJuegoRef datos) : _datos(datos)
        {
+           
+            if (!_backgroundTexture.loadFromFile("resources/outer.png"))
+            {
+                std::cerr << "Error cargando la imagen fondo.png";
+                exit(0);
+            }    
             
-            
+            _background.setTexture(_backgroundTexture);
        }
         
-        void EstadoInGame::Init()
+        void InGame::Init()
         {
-            map = new Map(_datos);
             personaje = new Personaje(_datos);
         }
         
-        void EstadoInGame::ManejarEventos()
+        void InGame::ManejarEventos()
         {
            
                      
@@ -86,18 +91,18 @@ namespace Galaga
             }        
             }
         }
-        void EstadoInGame::Update(float dt)
+        void InGame::Update(float dt)
         {
             if(_clock.getElapsedTime().asSeconds() > 3.0){
                    std::cout << "pasando tiempo "<< std::endl;
                      
             }
         }
-        void EstadoInGame::Render(float dt)
+        void InGame::Render(float dt)
         {
             _datos->ventana.clear();
-            map->Pintar();  
-            personaje->Pintar();             
+            _datos->ventana.draw(_background);
+            personaje->Pintar(); 
             _datos->ventana.display();
         }
         

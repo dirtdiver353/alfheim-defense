@@ -1,15 +1,16 @@
 
 #include "Juego.h"
-#include "EstadoInGame.h"
+#include "InGame.h"
+#include "Menu.h"
 
-namespace Galaga
+namespace Alfheim
 {
     
 
     Juego::Juego(int ancho, int alto, std::string titulo) 
     {
         _datos->ventana.create(sf::VideoMode(ancho, alto), titulo);
-        _datos->estado.AddEJ(EstadoJuegoRef(new EstadoInGame(this->_datos)));
+        _datos->state.AddEJ(JuegoStateRef(new Menu(this->_datos)));
         this->Iniciar();
     }
 
@@ -23,7 +24,7 @@ namespace Galaga
         
         while (this->_datos->ventana.isOpen())
         {
-            this->_datos->estado.ProcesarCambiosEJ();
+            this->_datos->state.ProcesarCambiosEJ();
             newTime = this ->_clock.getElapsedTime().asSeconds();
             frameTime = newTime - currentTime;
             
@@ -37,14 +38,14 @@ namespace Galaga
             
             while (acumulador >= dt)
             {
-                this->_datos->estado.GetActivoEJ()->ManejarEventos();
-                this->_datos->estado.GetActivoEJ()->Update(dt);
+                this->_datos->state.GetActivoEJ()->ManejarEventos();
+                this->_datos->state.GetActivoEJ()->Update(dt);
                 
                 acumulador -= dt;
         }
 
             interpolacion = acumulador / dt;
-            this->_datos->estado.GetActivoEJ()->Render(interpolacion);
+            this->_datos->state.GetActivoEJ()->Render(interpolacion);
         }
     }
 }

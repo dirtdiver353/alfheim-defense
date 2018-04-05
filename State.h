@@ -1,8 +1,8 @@
 #pragma once
 
-namespace Galaga
+namespace Alfheim
 {
-    class Estado
+    class State
     {
     public:
         virtual void Init() = 0;

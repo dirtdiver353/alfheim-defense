@@ -9,6 +9,6 @@
 int main()
 {
       
-    Galaga::Juego(640, 480, "SFML prueba");
+    Alfheim::Juego(640, 480, "SFML prueba");
     return EXIT_SUCCESS;
 }

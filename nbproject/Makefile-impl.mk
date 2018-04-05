@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Cargador Alfheim
+PROJECTNAME=CppApplication_3
 
 # Active Configuration
 DEFAULTCONF=Debug
