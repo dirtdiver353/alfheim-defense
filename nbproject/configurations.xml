@@ -7,10 +7,13 @@
       <itemPath>InGame.h</itemPath>
       <itemPath>Juego.h</itemPath>
       <itemPath>JuegoState.h</itemPath>
+      <itemPath>Mapa.h</itemPath>
       <itemPath>Menu.h</itemPath>
-      <itemPath>Musica.hpp</itemPath>
+      <itemPath>Musica.h</itemPath>
       <itemPath>Personaje.h</itemPath>
       <itemPath>State.h</itemPath>
+      <itemPath>tinystr.h</itemPath>
+      <itemPath>tinyxml.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -22,11 +25,15 @@
       <itemPath>InGame.cpp</itemPath>
       <itemPath>Juego.cpp</itemPath>
       <itemPath>JuegoState.cpp</itemPath>
+      <itemPath>Mapa.cpp</itemPath>
       <itemPath>Menu.cpp</itemPath>
       <itemPath>Musica.cpp</itemPath>
       <itemPath>Personaje.cpp</itemPath>
-      <itemPath>../tron_fv/clacon.ttf</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>tinystr.cpp</itemPath>
+      <itemPath>tinyxml.cpp</itemPath>
+      <itemPath>tinyxmlerror.cpp</itemPath>
+      <itemPath>tinyxmlparser.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -40,6 +47,9 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>tinyxml</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -50,7 +60,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <commandlineTool>g++ -std=c++11</commandlineTool>
+          <standard>8</standard>
           <incDir>
             <pElem>/usr/include/SFML</pElem>
           </incDir>
@@ -58,6 +68,7 @@
         <linkerTool>
           <linkerAddLib>
             <pElem>/usr/lib/x86_64-linux-gnu</pElem>
+            <pElem>tinyxml</pElem>
           </linkerAddLib>
           <linkerLibItems>
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-audio.so</linkerLibFileItem>
@@ -65,11 +76,10 @@
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-network.so</linkerLibFileItem>
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-system.so</linkerLibFileItem>
             <linkerLibFileItem>/usr/lib/x86_64-linux-gnu/libsfml-window.so</linkerLibFileItem>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="../tron_fv/clacon.ttf" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="InGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="InGame.h" ex="false" tool="3" flavor2="0">
@@ -82,13 +92,17 @@
       </item>
       <item path="JuegoState.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Mapa.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Mapa.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Menu.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Menu.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Musica.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Musica.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Musica.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Personaje.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -97,6 +111,18 @@
       <item path="State.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tinystr.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tinystr.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tinyxml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tinyxml.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tinyxmlerror.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tinyxmlparser.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -119,8 +145,6 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="../tron_fv/clacon.ttf" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="InGame.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="InGame.h" ex="false" tool="3" flavor2="0">
@@ -133,13 +157,17 @@
       </item>
       <item path="JuegoState.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Mapa.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Mapa.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Menu.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Menu.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Musica.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Musica.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Musica.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Personaje.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -148,6 +176,18 @@
       <item path="State.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tinystr.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tinystr.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tinyxml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tinyxml.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tinyxmlerror.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tinyxmlparser.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
   </confs>

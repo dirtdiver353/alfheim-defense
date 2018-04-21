@@ -9,14 +9,9 @@ namespace Alfheim
    
        InGame::InGame(DatosJuegoRef datos) : _datos(datos)
        {
+           mapa = new Mapa(); 
+           mapa->leerMapa();  
            
-            if (!_backgroundTexture.loadFromFile("resources/outer.png"))
-            {
-                std::cerr << "Error cargando la imagen fondo.png";
-                exit(0);
-            }    
-            
-            _background.setTexture(_backgroundTexture);
        }
         
         void InGame::Init()
@@ -101,7 +96,7 @@ namespace Alfheim
         void InGame::Render(float dt)
         {
             _datos->ventana.clear();
-            _datos->ventana.draw(_background);
+            mapa->dibujarMapa(_datos->ventana);
             personaje->Pintar(); 
             _datos->ventana.display();
         }

@@ -4,6 +4,7 @@
 #include "State.h"
 #include "Juego.h"
 #include "Personaje.h"
+#include "Mapa.h"
 
 namespace Alfheim
 {
@@ -23,6 +24,7 @@ namespace Alfheim
         sf::Clock _clock;
         sf::Texture _backgroundTexture;
         sf::Sprite _background;
+        Mapa *mapa; 
         Personaje *personaje;
         int xd = 0, yd = 0, xu = 0, ys = 0;
         int yu = 4, xs = 4;
