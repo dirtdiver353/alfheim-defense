@@ -9,14 +9,42 @@ namespace Alfheim
    
        InGame::InGame(DatosJuegoRef datos) : _datos(datos)
        {
-           mapa = new Mapa(); 
-           mapa->leerMapa();  
            
+           mapa = new Mapa();
+           mapa->leerMapa();
+            
        }
         
         void InGame::Init()
         {
             personaje = new Personaje(_datos);
+            
+            /* POCION DE PRUEBA */
+          pocPrueba = new Pocion(_datos, 32, 32, 1);
+            
+            
+            
+            
+            // Establece texto y posicion de contadores
+            _txtVida.setFont(txtFont);
+            _txtVida.setColor(sf::Color::White);
+            _txtVida.setString("Vida: "+std::to_string(personaje->getVida()));
+            // title.setScale(1.1, 1.1);
+            _txtVida.setPosition(sf::Vector2f(10, 10));
+            
+            _txtMana.setFont(txtFont);
+            _txtMana.setColor(sf::Color::White);
+            _txtMana.setString("Mana: "+std::to_string(personaje->getMana()));
+            // title.setScale(1.1, 1.1);
+            _txtMana.setPosition(sf::Vector2f(10, 25));
+            
+            _txtPuntos.setFont(txtFont);
+            _txtPuntos.setColor(sf::Color::White);
+            _txtPuntos.setString("Puntos: "+std::to_string(personaje->getPuntos()));
+            // title.setScale(1.1, 1.1);
+            _txtPuntos.setPosition(sf::Vector2f(10, 40));
+           
+            
         }
         
         void InGame::ManejarEventos()
@@ -44,6 +72,14 @@ namespace Alfheim
                                 pasos.restart();
                             }
                             personaje->Girar(1,xs,ys);
+                            
+                            
+                            /* PUNTOS DE PERSONAJE PRUEBA*/
+                            // ganar puntos y actualizar en pantalla
+                            personaje->setPuntos(personaje->getPuntos()+1);
+                             _txtPuntos.setString("Puntos: "+std::to_string(personaje->getPuntos()));
+           
+                            std::cout << personaje->getPuntos()<< std::endl;
                     }
                     
                      if(event.key.code == sf::Keyboard::Left){
@@ -89,16 +125,30 @@ namespace Alfheim
         void InGame::Update(float dt)
         {
             if(_clock.getElapsedTime().asSeconds() > 3.0){
-                   std::cout << "pasando tiempo "<< std::endl;
-                     
+                   std::cout << "updatin "<< std::endl;
+                   
+                   
+                   
             }
         }
         void InGame::Render(float dt)
         {
             _datos->ventana.clear();
-            mapa->dibujarMapa(_datos->ventana);
+             mapa->dibujarMapa(_datos->ventana);
+             
+            _datos->ventana.draw(_txtVida);
+            _datos->ventana.draw(_txtMana);
+            _datos->ventana.draw(_txtPuntos);
+            
+            
+           
             personaje->Pintar(); 
+            
+            pocPrueba->Pintar();
+            
             _datos->ventana.display();
+            
+            std::cout << "rendering "<< std::endl;
         }
         
    

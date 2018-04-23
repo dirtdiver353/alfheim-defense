@@ -17,11 +17,18 @@ Personaje::Personaje(DatosJuegoRef datos) : _datos(datos) {
              _personaje.setTextureRect(sf::IntRect(0*64, 0*64, 64, 64));
              // Lo dispongo en su posicion en la pantalla
              _personaje.setPosition(320, 240);
+             
+             // Inicializo contadores de vida, mana y puntos
+             vida = 100;
+             puntos = 0;
+             mana = 100;
 }
 
 void Personaje::Pintar()
 {
     _datos->ventana.draw(_personaje);
+    
+    
 }
 
 void Personaje::Girar(int dl, int x, int y)
@@ -40,6 +47,62 @@ void Personaje::Girar(int dl, int x, int y)
 void Personaje::Update(float dt)
 {
            
+}
+
+void Personaje::setVida(int i){
+    vida = i;
+};
+void Personaje::setMana(int i){
+    mana = i;
+};
+void Personaje::setPuntos(int i){
+    puntos = i;
+};
+
+int Personaje::getVida(){
+    return vida;
+};
+int Personaje::getMana(){
+    return mana;
+};
+int Personaje::getPuntos(){
+    return puntos;
+};
+
+
+bool Personaje::recibeDanyo(int cant){
+    // si no está activado el truco de invecibilidad
+    // recibe daño    
+    if(!invencible){
+        if(vida > cant){
+            vida -= cant;
+            if(vida <= 0)
+            {
+                muerto = true;
+            }
+        }
+        return true;
+    }
+    
+    return false;
+}
+
+bool Personaje::trucoInvencible(bool i){
+    invencible = i;
+    return invencible;
+}
+
+bool Personaje::compruebaMuerte(){
+    return muerto;
+}
+
+void Personaje::cogePocion(int tipo, int cant){
+    
+    if(tipo == 1){
+        vida+=cant;
+    }else if(tipo==2){
+        mana+=cant;
+    }
 }
 
 }

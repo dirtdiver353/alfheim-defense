@@ -1,3 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   Mapa.h
+ * Author: Victoria Hodelín Taranova
+ *
+ * Created on 22 de marzo de 2017, 18:09
+ */
+
 #ifndef MAPA_H
 #define MAPA_H
 #include <SFML/Graphics.hpp>
@@ -33,3 +46,4 @@ private:
 };
 
 #endif	/* CARGAR_H */
+

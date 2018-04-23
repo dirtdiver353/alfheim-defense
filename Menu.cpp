@@ -21,14 +21,14 @@ namespace Alfheim
     
     
     
-            if (!_backgroundTexture.loadFromFile("resources/giphy.gif"))
+            if (!_backgroundTexture.loadFromFile("resources/inicio2.jpg"))
             {
                // std::cout << "Error cargando la imagen fondo.png";
                 exit(0);
             }    
             
             _background.setTexture(_backgroundTexture);
-            _background.setScale(1,1.25);
+            _background.setScale(0.6,0.6);
     
     
             titleShadow.setFont(textFontTitle);
@@ -61,7 +61,7 @@ namespace Alfheim
 
             std::string ruta("resources/Achilles_Strings.ogg");
 
-            Musica *musica=new Musica(ruta);
+            musica=new Musica(ruta);
             musica->setLoop(true);
             musica->Play();
        }

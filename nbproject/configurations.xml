@@ -11,6 +11,7 @@
       <itemPath>Menu.h</itemPath>
       <itemPath>Musica.h</itemPath>
       <itemPath>Personaje.h</itemPath>
+      <itemPath>Pocion.h</itemPath>
       <itemPath>State.h</itemPath>
       <itemPath>tinystr.h</itemPath>
       <itemPath>tinyxml.h</itemPath>
@@ -29,6 +30,7 @@
       <itemPath>Menu.cpp</itemPath>
       <itemPath>Musica.cpp</itemPath>
       <itemPath>Personaje.cpp</itemPath>
+      <itemPath>Pocion.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>tinystr.cpp</itemPath>
       <itemPath>tinyxml.cpp</itemPath>
@@ -108,6 +110,10 @@
       </item>
       <item path="Personaje.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Pocion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Pocion.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="State.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
@@ -172,6 +178,10 @@
       <item path="Personaje.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Personaje.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Pocion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Pocion.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="State.h" ex="false" tool="3" flavor2="0">
       </item>

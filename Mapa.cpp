@@ -1,4 +1,15 @@
-#define TIXML_USE_STL
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   Mapa.h
+ * Author: Victoria Hodelín Taranova
+ *
+ * Created on 22 de marzo de 2017, 18:09
+ */
 
 #include "Mapa.h"
 #include "tinystr.h"
@@ -11,6 +22,7 @@ using namespace std;
 
 // CONSTRUCTORES
 Mapa::Mapa() {  
+    
 }
 
 Mapa::Mapa(const Mapa& orig) {
@@ -29,6 +41,7 @@ Mapa::~Mapa() {
 
 // LEER MAPA
 void Mapa::leerMapa(){
+    
     
     // Cargo archivo de mapa
     TiXmlDocument doc;
@@ -145,8 +158,11 @@ void Mapa::leerMapa(){
                     cout<<columns<<endl;
                     cout<<"Error"<<endl;
                 }
-                else if(gid>=0){   
+                else if(gid>0){   
                     // PENDIENTE
+        // si el capa == enemigos
+        // si gid != 0
+        // cogemos sprites enemigos y dibujamos en posicion
                     _tilemapSprite[l][y][x]=new sf::Sprite(_tilesetTexture,_tilesetSprite[gid].getTextureRect());
                     _tilemapSprite[l][y][x]->setPosition(x*_tileWidth,y*_tileHeigth);
                 }
@@ -174,6 +190,8 @@ void Mapa::leerMapa(){
 // Dibuja fondo y mapa por capas
 void Mapa::dibujarMapa(sf::RenderWindow& window){
     
+    window.draw(fondoSprite);
+
     for(int t=0; t<_numLayers; t++){
         for(int y=0; y<_height; y++){
             for(int x=0; x<_width; x++){

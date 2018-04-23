@@ -4,16 +4,16 @@
 #include "State.h"
 #include "Juego.h"
 #include "Personaje.h"
-#include "Musica.hpp"
+//#include "Musica.hpp"
 
 #define MAX_NUM_ITEMS 2
 
 namespace Alfheim
 {
-    class Menu : public State
+    class MenuMuerte : public State
     {
     public:
-        Menu(DatosJuegoRef datos);
+        MenuMuerte(DatosJuegoRef datos);
         
         void Init();
         
@@ -39,7 +39,8 @@ namespace Alfheim
         sf::Text title;
         sf::Text titleShadow;
        
-        Musica* musica;
+//        Musica* musica;
     };
 }
+
 

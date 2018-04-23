@@ -42,6 +42,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Menu.o \
 	${OBJECTDIR}/Musica.o \
 	${OBJECTDIR}/Personaje.o \
+	${OBJECTDIR}/Pocion.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/tinystr.o \
 	${OBJECTDIR}/tinyxml.o \
@@ -117,6 +118,11 @@ ${OBJECTDIR}/Personaje.o: Personaje.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Personaje.o Personaje.cpp
+
+${OBJECTDIR}/Pocion.o: Pocion.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pocion.o Pocion.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
