@@ -10,7 +10,8 @@ namespace Alfheim
     {
     public:
         Personaje( DatosJuegoRef datos);
-        void Pintar();
+        void Pintar(float pt, float lastPersonajeX, float lastPersonajeY, float newPersonajeX, float newPersonajeY);
+
         void Update(float dt);
         void Girar(int dl, int x, int y);
         
@@ -24,11 +25,16 @@ namespace Alfheim
         
         bool recibeDanyo(int cant);
         
-        bool trucoInvencible(bool i);
+        bool getInvencible();
+        void setInvencible(bool i);
+        
         
         bool compruebaMuerte();
         
-        void cogePocion(int tipo, int cant);
+        sf::Vector2f getPosicion();
+        sf::FloatRect getRect();
+        sf::Sprite getPersonaje();
+//        void cogePocion(int tipo, int cant, int xpoti, int ypoti);
         
     private:
         DatosJuegoRef _datos;

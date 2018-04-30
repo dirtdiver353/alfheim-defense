@@ -1,4 +1,6 @@
 #include "Personaje.h"
+#include <iostream>
+#include <sstream>
 
 namespace Alfheim{
     
@@ -15,8 +17,10 @@ Personaje::Personaje(DatosJuegoRef datos) : _datos(datos) {
              _personaje.setOrigin(64/2,64/2);
              //Cojo el sprite que me interesa por defecto del sheet
              _personaje.setTextureRect(sf::IntRect(0*64, 0*64, 64, 64));
+             //_personaje.setScale(0.75,0.75);
              // Lo dispongo en su posicion en la pantalla
-             _personaje.setPosition(320, 240);
+             _personaje.setPosition(6*8, 50*8);
+             
              
              // Inicializo contadores de vida, mana y puntos
              vida = 100;
@@ -24,8 +28,12 @@ Personaje::Personaje(DatosJuegoRef datos) : _datos(datos) {
              mana = 100;
 }
 
-void Personaje::Pintar()
+void Personaje::Pintar(float pt, float lastPersonajeX, float lastPersonajeY, float newPersonajeX, float newPersonajeY)
 {
+    float personajeX = lastPersonajeX*(1-pt) + newPersonajeX*pt;
+    float personajeY = lastPersonajeY*(1-pt) + newPersonajeY*pt;
+               
+   _personaje.setPosition(personajeX,personajeY);
     _datos->ventana.draw(_personaje);
     
     
@@ -87,22 +95,44 @@ bool Personaje::recibeDanyo(int cant){
     return false;
 }
 
-bool Personaje::trucoInvencible(bool i){
+void Personaje::setInvencible(bool i){
+    
     invencible = i;
+    
+}
+
+bool Personaje::getInvencible(){
     return invencible;
 }
 
+
 bool Personaje::compruebaMuerte(){
+    if(vida <= 0)
+        muerto = true;
     return muerto;
 }
 
-void Personaje::cogePocion(int tipo, int cant){
+ sf::Vector2f Personaje::getPosicion(){
+    // std::cout << "pj x y "<<  _personaje.getPosition().x << _personaje.getPosition().y<< std::endl;
+    return _personaje.getPosition();
+ 
+ }
+ 
+ sf::FloatRect Personaje::getRect(){
+     return _personaje.getGlobalBounds();
+ }
+ 
+ sf::Sprite Personaje::getPersonaje(){
+     return _personaje;
+ }
+
+/*void Personaje::cogePocion(int tipo, int cant){
     
     if(tipo == 1){
         vida+=cant;
     }else if(tipo==2){
         mana+=cant;
     }
-}
+}*/
 
 }

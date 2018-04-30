@@ -18,11 +18,21 @@
 class Mapa {
 public:
     
-    Mapa();
+    Mapa(const char * str1);
     Mapa(const Mapa& orig);
     virtual ~Mapa();    
     void leerMapa();
     void dibujarMapa(sf::RenderWindow &window); 
+    bool colision(int x, int y);
+    
+    bool colision2(int x, int y, int dir);
+    
+    sf::Vector2f *getPosPocionesVida();
+    int getNumPocionesVida();
+    
+    sf::Vector2f *getPosPocionesMana();
+    int getNumPocionesMana();
+    
     
  
 private:
@@ -32,7 +42,8 @@ private:
     int _height;
     int _tileHeigth;
     int _width;
-    int _tileWidth;    
+    int _tileWidth;
+    const char *_filename;
     
     sf::Sprite ****_tilemapSprite;
     sf::Sprite *_tilesetSprite;
@@ -40,6 +51,12 @@ private:
     
     sf::Texture _tilesetTexture;
     sf::Texture fondoTexture;
+    
+    sf::Vector2f *posPocionesVida;
+    int numPocionesVida;
+    
+    sf::Vector2f *posPocionesMana;
+    int numPocionesMana;
        
     
     

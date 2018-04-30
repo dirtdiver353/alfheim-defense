@@ -8,15 +8,15 @@
 #include "Pocion.h"
 #include "Mapa.h"
 #include "Enemigo.h"
-#include "Nivel1.h"
+#include "Nivel2.h"
 #include "Arma.h"
 
 namespace Alfheim
 {
-    class InGame : public State
+    class InGame2 : public State
     {
     public:
-        InGame(DatosJuegoRef datos);
+        InGame2(DatosJuegoRef datos);
         
         void Init();
         
@@ -32,7 +32,7 @@ namespace Alfheim
         sf::Sprite _background;
         Personaje *personaje;
         Arma *arma;
-        Nivel1 *nivel1;
+        Nivel2 *nivel2;
         int xd = 0, yd = 0, xu = 0, ys = 0;
         int yu = 4, xs = 4;
         char dire;

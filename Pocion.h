@@ -10,23 +10,32 @@
 #include "State.h"
 #include "Juego.h"
 #include "Personaje.h"
-#include "Interfaz.h"
+
+//#include "Interfaz.h"
 
 namespace Alfheim
 {
 
 class Pocion {
 public:
-    Pocion(DatosJuegoRef datos, int x, int y, int t);
-    void Pintar();
+    Pocion();
+   // Pocion(DatosJuegoRef datos, int t);
+    
+    void setPocion(sf::Vector2f pos, int t);
+    //void Pintar();
     void Update(float dt);
     void Eliminar();
     
     int getCantidad();
     int getTipo();
     
+    void setTexture(sf::Texture tx);
+    //sf::Texture getTexture();
+    void setSprite(sf::Sprite sp);
+    sf::Sprite getSprite();
+    
 private:
-    DatosJuegoRef _datos;
+   // DatosJuegoRef _datos;
     
     int tipo;
     int cantidad;

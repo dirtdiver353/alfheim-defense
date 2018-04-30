@@ -1,15 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/* 
- * File:   Mapa.h
- * Author: Victoria Hodelín Taranova
- *
- * Created on 22 de marzo de 2017, 18:09
- */
 
 #include "Mapa.h"
 #include "tinystr.h"
@@ -21,7 +10,8 @@
 using namespace std;
 
 // CONSTRUCTORES
-Mapa::Mapa() {  
+Mapa::Mapa(const char * str1) {  
+   _filename = str1;
     
 }
 
@@ -45,7 +35,7 @@ void Mapa::leerMapa(){
     
     // Cargo archivo de mapa
     TiXmlDocument doc;
-    doc.LoadFile("TorreZostar.tmx");    
+    doc.LoadFile(_filename);    
     
     // Guarda atributos de mapa tmx
     TiXmlElement* map = doc.FirstChildElement("map");
@@ -101,6 +91,8 @@ void Mapa::leerMapa(){
     while(layer){
         data= layer->FirstChildElement("data")->FirstChildElement("tile");
         name[j]= (string)layer->Attribute("name");
+        std::cout<<"nombre y numero:"<< name[j]<<endl;
+        //capa de muros 1 y 2 es colision
         
         
             while(data){
@@ -147,7 +139,10 @@ void Mapa::leerMapa(){
     }
    
     
-    // Asigna sprites por capas a tilemapSprite   
+    // Asigna sprites por capas a tilemapSprite 
+    numPocionesVida = 0;
+    numPocionesMana = 0;
+    
     for(int l=0; l<_numLayers; l++){
         for(int y=0; y<_height; y++){
             for(int x=0; x<_width;x++){
@@ -160,11 +155,36 @@ void Mapa::leerMapa(){
                 }
                 else if(gid>0){   
                     // PENDIENTE
-        // si el capa == enemigos
-        // si gid != 0
-        // cogemos sprites enemigos y dibujamos en posicion
+                    // Depende de capa dibujamos enemigos u objs
+                    if(l == 9){
+                        // capa enemigos
+                        
+                        
+                    
+                    
+                    }else if ( l == 10){
+                    
+                        // capa pociones
+                        //compruebo GID
+                         
+                         if(gid == 997)
+                         {
+                             numPocionesVida++;
+                             //pocion vida
+                            // Pocion *pv = new Pocion(x,y,1);
+                         } else if ( gid == 998)
+                         {
+                             numPocionesMana++;
+                         }
+                        
+                    }
+                    
+                    
                     _tilemapSprite[l][y][x]=new sf::Sprite(_tilesetTexture,_tilesetSprite[gid].getTextureRect());
                     _tilemapSprite[l][y][x]->setPosition(x*_tileWidth,y*_tileHeigth);
+                
+               
+                
                 }
                 else{
                     _tilemapSprite[l][y][x]=NULL;
@@ -172,8 +192,52 @@ void Mapa::leerMapa(){
             }
         }
     }
-      
-
+      std::cout << "num pociones vida: "<< numPocionesVida << std::endl;
+                            
+    posPocionesVida = new sf::Vector2f[numPocionesVida];
+    posPocionesMana = new sf::Vector2f[numPocionesMana];
+    int aux = 0;
+    int aux1 = 0;
+    
+    for(int t=0; t<_numLayers; t++){
+        for(int y=0; y<_height; y++){
+            for(int x=0; x<_width; x++){
+                if(_tilemapSprite[t][y][x]!=NULL){
+                    if(t == 9){
+                        // capa enemigos
+                        
+                        
+                    
+                    
+                    }else if ( t == 10){
+                    
+                        // capa pociones
+                        //compruebo GID
+                         int gid=_tilemap[t][y][x]-1;
+                         if(gid == 997)
+                         {
+                             
+                             posPocionesVida[aux].x = x*_tileWidth;
+                             posPocionesVida[aux].y = y*_tileHeigth;
+                             //std::cout << posPocionesVida[aux].x << " " << posPocionesVida[aux].y << std::endl;
+                             
+                             aux++;
+                             //pocion vida
+                            // Pocion *pv = new Pocion(x,y,1);
+                         } else if (gid == 998){
+                             posPocionesMana[aux1].x = x*_tileWidth;
+                             posPocionesMana[aux1].y = y*_tileHeigth;
+                             //std::cout << posPocionesVida[aux].x << " " << posPocionesVida[aux].y << std::endl;
+                             
+                             aux1++;
+                         }
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
     // INFO 
     cout<<endl;
     cout<<"Datos del mapa:"<<endl;
@@ -191,15 +255,126 @@ void Mapa::leerMapa(){
 void Mapa::dibujarMapa(sf::RenderWindow& window){
     
     window.draw(fondoSprite);
-
+    int aux = 0;
+    
     for(int t=0; t<_numLayers; t++){
         for(int y=0; y<_height; y++){
             for(int x=0; x<_width; x++){
                 if(_tilemapSprite[t][y][x]!=NULL){
+                    if(t == 9){
+                        // capa enemigos
+                        
+                        
+                    
+                    
+                    }else if ( t == 10){
+                    
+                        // capa pociones
+                        //compruebo GID
+                         int gid=_tilemap[t][y][x]-1;
+                         if(gid == 997)
+                         {
+                             
+                             //posPocionesVida[aux].x = x;
+                           //  posPocionesVida[aux].y = y;
+                            // std::cout << posPocionesVida[aux].x << " " << posPocionesVida[aux].y << std::endl;
+                             
+                           //  aux++;
+                             //pocion vida
+                            // Pocion *pv = new Pocion(x,y,1);
+                         }
+                        
+                    }
+                    else{
+                    
                     window.draw(*(_tilemapSprite[t][y][x]));
+                    }
                 }
             }
         }
     }
     
 }
+
+
+sf::Vector2f* Mapa::getPosPocionesVida(){
+    return posPocionesVida;
+    
+
+}
+
+int Mapa::getNumPocionesVida(){
+    return numPocionesVida;
+}
+
+
+sf::Vector2f* Mapa::getPosPocionesMana(){
+    return posPocionesMana;
+
+}
+
+int Mapa::getNumPocionesMana(){
+    return numPocionesMana;
+}
+
+bool Mapa::colision(int x, int y){
+   // std::cout << "peta encolision "<< std::endl;
+    bool choque = false;
+    //std::cout << "peta ants bool false "<< std::endl;
+    x = x/_tileWidth ;
+    y = y/_tileHeigth;
+    std::cout << "x y tilemap "<<  x << " "<<y<< std::endl;
+    //int gid=_tilemap[t][y][x]-1
+    if(_tilemap[3][y][x]-1>0)
+        choque = true;
+    if (_tilemap[4][y][x]-1>0)
+        choque = true;
+    if (_tilemap[5][y][x]-1>0)
+        choque = true;
+    /*if (_tilemap[6][y][x]-1>0)
+        choque = true;
+    if (_tilemap[7][y][x]-1>0)
+        choque = true;*/
+    
+    //TIENE K DETECTAR CLISIONES DE LOS PIES 
+    // NO DEL CENTRO
+    
+        
+    
+                             
+    
+    return choque;
+
+}
+
+bool Mapa::colision2(int x, int y, int dir){
+    
+ bool choque = false;
+    //std::cout << "peta ants bool false "<< std::endl;
+ if(dir == 1){ //up
+     x = x/_tileWidth -1;
+    y = y/_tileHeigth ;
+ }else if (dir == 2){ //down
+     x = x/_tileWidth +1;
+    y = y/_tileHeigth ;
+ }else if (dir == 3){ //left
+     x = x/_tileWidth ;
+    y = y/_tileHeigth +1;
+ }else{ //right
+     x = x/_tileWidth ;
+    y = y/_tileHeigth -1;
+ }
+    
+    std::cout << "x y tilemap "<<  x << " "<<y<< std::endl;
+    //int gid=_tilemap[t][y][x]-1
+    if(_tilemap[3][y][x]-1>0)
+        choque = true;
+    if (_tilemap[4][y][x]-1>0)
+        choque = true;
+    if (_tilemap[5][y][x]-1>0)
+        choque = true;
+    
+    return choque;
+ 
+}
+

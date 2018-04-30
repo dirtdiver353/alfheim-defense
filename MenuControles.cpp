@@ -1,3 +1,6 @@
+
+#include "MenuControles.h"
+
 #pragma once
 
 #include <sstream>
@@ -6,25 +9,29 @@
 #include "Musica.hpp"
 #include <iostream>
 
-#include "MenuMuerte.h"
+#include "Menu.h"
+#include "Personaje.h"
 
 namespace Alfheim
 {
-    MenuMuerte::MenuMuerte(DatosJuegoRef datos) : _datos(datos) 
+    MenuControles::MenuControles(DatosJuegoRef datos) : _datos(datos) 
     {
         if(!textFont.loadFromFile("resources/fonts/clacon.ttf")
             || !textFontTitle.loadFromFile("resources/fonts/Morgan TwentyNine.ttf")){
-            // Error en carga de fuente de texto
-            exit(0);        
-        }
+        // Error en carga de fuente de texto
+        exit(0);
+        
+    }
     
     
     
-        if (!_backgroundTexture.loadFromFile("resources/muerte.jpg"))
-        {
-           // std::cout << "Error cargando la imagen fondo.png";
-            exit(0);
-        }    
+    if (!_backgroundTexture.loadFromFile("resources/controles.jpg"))
+    {
+       // std::cout << "Error cargando la imagen fondo.png";
+        exit(0);
+    } 
+        
+    
             
     _background.setTexture(_backgroundTexture);
     _background.setScale(0.6,0.6);
@@ -33,23 +40,42 @@ namespace Alfheim
     titleShadow.setFont(textFontTitle);
     //title.setStyle(sf::Text::);
     titleShadow.setColor(sf::Color::Black);
-    titleShadow.setString("Has muerto");
+    titleShadow.setString("Controles");
    // titleShadow.setScale(1.1, 1.1);
-    titleShadow.setPosition(sf::Vector2f(640/2-118, 58));
+    titleShadow.setPosition(sf::Vector2f(640/2-98, 58));
     
     title.setFont(textFontTitle);
     //title.setStyle(sf::Text::);
     title.setColor(sf::Color::White);
-    title.setString("Has muerto");
+    title.setString("Controles");
    // title.setScale(1.1, 1.1);
-    title.setPosition(sf::Vector2f(640/2-120, 60));
+    title.setPosition(sf::Vector2f(640/2-100, 60));
+    
+    
+    
+    c1.setFont(textFont);
+    c2.setFont(textFont);
+    c3.setFont(textFont);
+    
+    c1.setColor(sf::Color::White);
+    c2.setColor(sf::Color::White);
+    c3.setColor(sf::Color::White);
+    
+    c1.setString("[Up] [Down] [Left] [Right] Movimiento");
+    c2.setString("[Espace] Ataque");
+    c3.setString("[Q] Salir del juego");
+    
+    c1.setPosition(sf::Vector2f(640/2-230, 190));
+    c2.setPosition(sf::Vector2f(640/2-90, 210));
+    c3.setPosition(sf::Vector2f(640/2-120, 230));
+    
     
             
     options[0].setFont(textFont);
     options[0].setColor(sf::Color::White);
-    options[0].setString("Volver a jugar nivel");
+    options[0].setString("Volver a menu principal");
    // options[0].setScale(1.50, 1.50);
-    options[0].setPosition(sf::Vector2f(640/2-120, 480/2+110));
+    options[0].setPosition(sf::Vector2f(640/2-140, 480/2+110));
     
     options[1].setFont(textFont);
     options[1].setColor(sf::Color::Yellow);
@@ -57,6 +83,8 @@ namespace Alfheim
     options[1].setPosition(sf::Vector2f(640/2-30, 480/2 + 140));
     
     selectedItem = 0;
+    
+    
     
     std::string ruta("resources/Achilles_Strings.ogg");
 
@@ -67,12 +95,12 @@ namespace Alfheim
 
     }
 
-    void MenuMuerte::Init()
+    void MenuControles::Init()
     {
 
     }
         
-        void MenuMuerte::ManejarEventos()
+        void MenuControles::ManejarEventos()
         {
            
 
@@ -105,8 +133,8 @@ namespace Alfheim
                                 case sf::Keyboard::Return:
                                     switch(this->GetSelectedItem()){
                                         case 0:
-                                            std::cout<< "vuelve a jugar nivel" << std::endl;
-                                             _datos->state.AddEJ(JuegoStateRef(new InGame(_datos)),true);
+                                            std::cout<< "vuelve menu principal" << std::endl;
+                                             _datos->state.AddEJ(JuegoStateRef(new Menu(_datos)),true);
        
                                             break; 
                                         case 1:
@@ -121,12 +149,12 @@ namespace Alfheim
             }     
         }
         
-    void MenuMuerte::Update(float dt)
+    void MenuControles::Update(float dt)
     {
 
     }
     
-    void MenuMuerte::Render(float dt)
+    void MenuControles::Render(float dt)
     {
 
         _datos->ventana.clear();
@@ -134,6 +162,10 @@ namespace Alfheim
         _datos->ventana.draw(_background);
         _datos->ventana.draw(titleShadow);
         _datos->ventana.draw(title);
+        _datos->ventana.draw(c1);
+        _datos->ventana.draw(c2);
+        _datos->ventana.draw(c3);
+        
 
         for(int i = 0; i < MAX_NUM_ITEMS; i++){
             _datos->ventana.draw(options[i]);
@@ -144,7 +176,7 @@ namespace Alfheim
     }
         
 
-    void MenuMuerte::MoveUp(){
+    void MenuControles::MoveUp(){
 
         if(selectedItem -1 >= 0){
 
@@ -154,7 +186,7 @@ namespace Alfheim
         }
     }
 
-    void MenuMuerte::MoveDown(){
+    void MenuControles::MoveDown(){
 
         if(selectedItem +1 < MAX_NUM_ITEMS){
 
@@ -164,7 +196,7 @@ namespace Alfheim
         }
     }
 
-    int MenuMuerte::GetSelectedItem(){
+    int MenuControles::GetSelectedItem(){
         return selectedItem;
     }
 

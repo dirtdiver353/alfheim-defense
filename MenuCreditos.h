@@ -4,16 +4,16 @@
 #include "State.h"
 #include "Juego.h"
 #include "Personaje.h"
-#include "Musica.hpp"
 
-#define MAX_NUM_ITEMS_INI 4
+
+#define MAX_NUM_ITEMS 2
 
 namespace Alfheim
 {
-    class Menu : public State
+    class MenuCreditos : public State
     {
     public:
-        Menu(DatosJuegoRef datos);
+        MenuCreditos(DatosJuegoRef datos);
         
         void Init();
         
@@ -32,14 +32,16 @@ namespace Alfheim
         DatosJuegoRef _datos;
         int selectedItem;
         sf::Font textFont;
-        sf::Text options[MAX_NUM_ITEMS_INI];
+        sf::Text options[MAX_NUM_ITEMS];
         sf::Texture _backgroundTexture;
         sf::Sprite _background;
         sf::Font textFontTitle;
         sf::Text title;
         sf::Text titleShadow;
+        sf::Text c1, c2, c3;
        
-        Musica* musica;
+//        Musica* musica;
     };
 }
+
 

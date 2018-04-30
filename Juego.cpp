@@ -2,6 +2,8 @@
 #include "Juego.h"
 #include "InGame.h"
 #include "Menu.h"
+#include <algorithm>
+#define UPDATE_TICK_TIME 1000/15
 
 namespace Alfheim
 {

@@ -35,12 +35,22 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Arma.o \
+	${OBJECTDIR}/Enemigo.o \
+	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/InGame.o \
+	${OBJECTDIR}/InGame2.o \
 	${OBJECTDIR}/Juego.o \
 	${OBJECTDIR}/JuegoState.o \
 	${OBJECTDIR}/Mapa.o \
 	${OBJECTDIR}/Menu.o \
+	${OBJECTDIR}/MenuControles.o \
+	${OBJECTDIR}/MenuCreditos.o \
+	${OBJECTDIR}/MenuFinal.o \
+	${OBJECTDIR}/MenuMuerte.o \
 	${OBJECTDIR}/Musica.o \
+	${OBJECTDIR}/Nivel1.o \
+	${OBJECTDIR}/Nivel2.o \
 	${OBJECTDIR}/Personaje.o \
 	${OBJECTDIR}/Pocion.o \
 	${OBJECTDIR}/main.o \
@@ -74,10 +84,30 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cppapplication_3: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cppapplication_3 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/Arma.o: Arma.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Arma.o Arma.cpp
+
+${OBJECTDIR}/Enemigo.o: Enemigo.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Enemigo.o Enemigo.cpp
+
+${OBJECTDIR}/Hud.o: Hud.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Hud.o Hud.cpp
+
 ${OBJECTDIR}/InGame.o: InGame.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/InGame.o InGame.cpp
+
+${OBJECTDIR}/InGame2.o: InGame2.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/InGame2.o InGame2.cpp
 
 ${OBJECTDIR}/Juego.o: Juego.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -99,10 +129,40 @@ ${OBJECTDIR}/Menu.o: Menu.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Menu.o Menu.cpp
 
+${OBJECTDIR}/MenuControles.o: MenuControles.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MenuControles.o MenuControles.cpp
+
+${OBJECTDIR}/MenuCreditos.o: MenuCreditos.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MenuCreditos.o MenuCreditos.cpp
+
+${OBJECTDIR}/MenuFinal.o: MenuFinal.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MenuFinal.o MenuFinal.cpp
+
+${OBJECTDIR}/MenuMuerte.o: MenuMuerte.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MenuMuerte.o MenuMuerte.cpp
+
 ${OBJECTDIR}/Musica.o: Musica.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Musica.o Musica.cpp
+
+${OBJECTDIR}/Nivel1.o: Nivel1.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Nivel1.o Nivel1.cpp
+
+${OBJECTDIR}/Nivel2.o: Nivel2.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Nivel2.o Nivel2.cpp
 
 ${OBJECTDIR}/Personaje.o: Personaje.cpp 
 	${MKDIR} -p ${OBJECTDIR}

@@ -5,6 +5,8 @@
 #include "InGame.h"
 #include "Musica.hpp"
 #include <iostream>
+#include "MenuControles.h"
+#include "MenuCreditos.h"
 
 namespace Alfheim
 {
@@ -50,13 +52,24 @@ namespace Alfheim
             options[0].setColor(sf::Color::White);
             options[0].setString("Jugar");
            // options[0].setScale(1.50, 1.50);
-            options[0].setPosition(sf::Vector2f(640/2-10, 480/2));
+            options[0].setPosition(sf::Vector2f(640/2-35, 190));
 
             options[1].setFont(textFont);
             options[1].setColor(sf::Color::Yellow);
-            options[1].setString("Salir");
-            options[1].setPosition(sf::Vector2f(640/2-10, 480/2 + 30));
+            options[1].setString("Ver controles");
+            options[1].setPosition(sf::Vector2f(640/2-90, 210));
 
+            options[2].setFont(textFont);
+            options[2].setColor(sf::Color::Yellow);
+            options[2].setString("Ver creditos");
+            options[2].setPosition(sf::Vector2f(640/2-80, 230));
+            
+            options[3].setFont(textFont);
+            options[3].setColor(sf::Color::Yellow);
+            options[3].setString("Salir");
+            options[3].setPosition(sf::Vector2f(640/2-40, 250));
+
+            
             selectedItem = 0;
 
             std::string ruta("resources/Achilles_Strings.ogg");
@@ -109,9 +122,17 @@ namespace Alfheim
        
                                             break; 
                                         case 1:
+                                             _datos->state.AddEJ(JuegoStateRef(new MenuControles(_datos)),true);
+       ;
+                                            break;
+                                        case 2:
+                                             _datos->state.AddEJ(JuegoStateRef(new MenuCreditos(_datos)),true);
+       ;
+                                            break;  
+                                        case 3:
                                             _datos->ventana.close();
                                             std::cout<< "exit" << std::endl;
-                                            break;
+                                            break;    
                                     }
                                     break;
                             }
@@ -139,7 +160,7 @@ namespace Alfheim
             _datos->ventana.draw(titleShadow);
             _datos->ventana.draw(title);
 
-            for(int i = 0; i < MAX_NUM_ITEMS; i++){
+            for(int i = 0; i < MAX_NUM_ITEMS_INI; i++){
                 _datos->ventana.draw(options[i]);
             }
             _datos->ventana.display();
@@ -160,7 +181,7 @@ namespace Alfheim
 
         void Menu::MoveDown(){
 
-            if(selectedItem +1 < MAX_NUM_ITEMS){
+            if(selectedItem +1 < MAX_NUM_ITEMS_INI){
 
                 options[selectedItem].setColor(sf::Color::Yellow);
                 selectedItem++;
