@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Arma.o \
+	${OBJECTDIR}/Bloque.o \
 	${OBJECTDIR}/Enemigo.o \
 	${OBJECTDIR}/Hud.o \
 	${OBJECTDIR}/InGame.o \
@@ -98,6 +99,11 @@ ${OBJECTDIR}/Arma.o: Arma.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Arma.o Arma.cpp
+
+${OBJECTDIR}/Bloque.o: Bloque.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -I/usr/include/SFML -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Bloque.o Bloque.cpp
 
 ${OBJECTDIR}/Enemigo.o: Enemigo.cpp 
 	${MKDIR} -p ${OBJECTDIR}

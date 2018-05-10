@@ -324,14 +324,14 @@ bool Mapa::colision(int x, int y){
     x = x/_tileWidth ;
     y = y/_tileHeigth;
     std::cout << "x y tilemap "<<  x << " "<<y<< std::endl;
-    //int gid=_tilemap[t][y][x]-1
+    /*int gid=_tilemap[t][y][x]-1
     if(_tilemap[3][y][x]-1>0)
-        choque = true;
+     //   choque = true;
     if (_tilemap[4][y][x]-1>0)
         choque = true;
     if (_tilemap[5][y][x]-1>0)
         choque = true;
-    /*if (_tilemap[6][y][x]-1>0)
+    if (_tilemap[6][y][x]-1>0)
         choque = true;
     if (_tilemap[7][y][x]-1>0)
         choque = true;*/
@@ -367,13 +367,13 @@ bool Mapa::colision2(int x, int y, int dir){
     
     std::cout << "x y tilemap "<<  x << " "<<y<< std::endl;
     //int gid=_tilemap[t][y][x]-1
-    if(_tilemap[3][y][x]-1>0)
+   /* if(_tilemap[3][y][x]-1>0)
         choque = true;
     if (_tilemap[4][y][x]-1>0)
         choque = true;
     if (_tilemap[5][y][x]-1>0)
         choque = true;
-    
+    */
     return choque;
  
 }

@@ -3,6 +3,7 @@
 #include <sstream>
 #include "Menu.h"
 #include "InGame.h"
+#include "InGame2.h"
 #include "Musica.hpp"
 #include <iostream>
 #include "MenuControles.h"
@@ -113,6 +114,10 @@ namespace Alfheim
                                 case sf::Keyboard::Down:
                                     this->MoveDown();
                                     break;
+                                //truco para acceder al nivel 2 desde el menu principal
+                                case sf::Keyboard::Q:
+                                   _datos->state.AddEJ(JuegoStateRef(new InGame2(_datos)),true);
+                                break;
 
                                 case sf::Keyboard::Return:
                                     switch(this->GetSelectedItem()){
