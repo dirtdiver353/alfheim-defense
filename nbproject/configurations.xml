@@ -72,7 +72,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>tinyxml</Elem>
+    <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

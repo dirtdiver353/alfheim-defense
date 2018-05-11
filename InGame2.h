@@ -11,6 +11,7 @@
 #include "Nivel2.h"
 #include "Arma.h"
 
+
 namespace Alfheim
 {
     class InGame2 : public State
@@ -31,6 +32,7 @@ namespace Alfheim
         sf::Texture _backgroundTexture;
         sf::Sprite _background;
         Personaje *personaje;
+         
         Arma *arma;
         Nivel2 *nivel2;
         int xd = 0, yd = 0, xu = 0, ys = 0;

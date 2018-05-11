@@ -17,9 +17,10 @@ namespace Alfheim
        {
            level1 = true;
            level2 = false;
-           nivel2 = new Nivel2();
+           nivel2 = new Nivel2(_datos);
            const char * torre = "CiudadRuinas.tmx";
            nivel2->setMapa(torre);
+           nivel2->setBloques(); 
            
            if(level1){
            posPocionesVida = nivel2->getMapa()->getPosPocionesVida();
@@ -32,6 +33,7 @@ namespace Alfheim
         
         void InGame2::Init()
         {
+           
             personaje = new Personaje(_datos);
             posPJ = personaje->getPosicion();
             recPJ = personaje->getRect();
@@ -143,6 +145,7 @@ namespace Alfheim
                             
                                 personaje->Girar(1,xs,ys);
                                 dire = 'r';
+                               nivel2->MoverBloques(1,personaje->getPersonaje());
                         }
                             
                             
@@ -168,6 +171,7 @@ namespace Alfheim
                            // if(!nivel2->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(2,xs,ys);
                                 dire = 'l';
+                                 nivel2->MoverBloques(2,personaje->getPersonaje());
                         }
                      }
                         
@@ -191,6 +195,7 @@ namespace Alfheim
                            // if(!nivel2->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(3,xu,yu);
                                 dire = 'u';
+                              nivel2->MoverBloques(3,personaje->getPersonaje());
                         }
                      }
                         
@@ -214,6 +219,7 @@ namespace Alfheim
                            // if(!nivel2->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(4,xd,yd);
                                 dire = 'd';
+                                nivel2->MoverBloques(4,personaje->getPersonaje());
                         }
                             
                        }
@@ -240,6 +246,7 @@ namespace Alfheim
         }
         void InGame2::Update(float dt)
         {
+            
             
             if(_clock.getElapsedTime().asSeconds() > 1.0){
                 arma->Update(dt); 
@@ -311,6 +318,7 @@ namespace Alfheim
             _datos->ventana.draw(hud->GetTxtPuntos());
             
             arma->Pintar();
+            nivel2->PintarBloques();
             
             personaje->Pintar(pt, lastPersonajeX,lastPersonajeY,newPersonajeX,newPersonajeY); 
             }

@@ -18,9 +18,10 @@ namespace Alfheim
        {
            level1 = true;
            level2 = false;
-           nivel1 = new Nivel1();
+           nivel1 = new Nivel1(_datos);
            const char * torre = "TorreZostar.tmx";
            nivel1->setMapa(torre);
+           nivel1->setBloques(); 
            
            if(level1){
            posPocionesVida = nivel1->getMapa()->getPosPocionesVida();
@@ -33,7 +34,7 @@ namespace Alfheim
         
         void InGame::Init()
         {
-            bloque = new Bloque(_datos);
+           
             personaje = new Personaje(_datos);
             posPJ = personaje->getPosicion();
             recPJ = personaje->getRect();
@@ -145,14 +146,7 @@ namespace Alfheim
                             
                                 personaje->Girar(1,xs,ys);
                                 dire = 'r';
-                                if(personaje->getPersonaje().getPosition().x
-                                    == bloque->getBloque().getPosition().x-16
-                                    && (personaje->getPersonaje().getPosition().y
-                                    >=  bloque->getBloque().getPosition().y-40
-                                    && personaje->getPersonaje().getPosition().y
-                                    <=  bloque->getBloque().getPosition().y-16 )){
-                                    bloque->Girar(1);
-                                }
+                               nivel1->MoverBloques(1,personaje->getPersonaje());
                         }
                             
                             
@@ -178,14 +172,7 @@ namespace Alfheim
                            // if(!nivel1->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(2,xs,ys);
                                 dire = 'l';
-                                if(personaje->getPersonaje().getPosition().x
-                                    == bloque->getBloque().getPosition().x+16
-                                    && (personaje->getPersonaje().getPosition().y
-                                    >=  bloque->getBloque().getPosition().y-40
-                                    && personaje->getPersonaje().getPosition().y
-                                    <=  bloque->getBloque().getPosition().y-16 )){
-                                    bloque->Girar(2);
-                                }
+                                 nivel1->MoverBloques(2,personaje->getPersonaje());
                         }
                      }
                         
@@ -209,14 +196,7 @@ namespace Alfheim
                            // if(!nivel1->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(3,xu,yu);
                                 dire = 'u';
-                                if(personaje->getPersonaje().getPosition().x
-                                    >= bloque->getBloque().getPosition().x-16
-                                    && personaje->getPersonaje().getPosition().x
-                                    <= bloque->getBloque().getPosition().x+16
-                                    && personaje->getPersonaje().getPosition().y
-                                    ==  bloque->getBloque().getPosition().y-16 ){
-                                bloque->Girar(3);
-                                }
+                              nivel1->MoverBloques(3,personaje->getPersonaje());
                         }
                      }
                         
@@ -240,14 +220,7 @@ namespace Alfheim
                            // if(!nivel1->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(4,xd,yd);
                                 dire = 'd';
-                                if(personaje->getPersonaje().getPosition().x
-                                    >= bloque->getBloque().getPosition().x-16
-                                    && personaje->getPersonaje().getPosition().x
-                                    <= bloque->getBloque().getPosition().x+16
-                                    && personaje->getPersonaje().getPosition().y
-                                    ==  bloque->getBloque().getPosition().y-40 ){
-                                    bloque->Girar(4);
-                                }
+                                nivel1->MoverBloques(4,personaje->getPersonaje());
                         }
                             
                        }
@@ -346,7 +319,8 @@ namespace Alfheim
             _datos->ventana.draw(hud->GetTxtPuntos());
             
             arma->Pintar();
-            bloque->Pintar();
+            nivel1->PintarBloques();
+            
             personaje->Pintar(pt, lastPersonajeX,lastPersonajeY,newPersonajeX,newPersonajeY); 
             }
             
