@@ -154,7 +154,7 @@ namespace Alfheim
 
     }
     
-    void MenuCreditos::Render(float dt)
+    void MenuCreditos::Render(float pt)
     {
 
         _datos->ventana.clear();

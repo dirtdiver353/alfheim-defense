@@ -12,7 +12,7 @@ namespace Alfheim
         
         virtual void ManejarEventos() = 0;
         virtual void Update(float dt) = 0;
-        virtual void Render(float dt) = 0;
+        virtual void Render(float pt) = 0;
     };
 
 }

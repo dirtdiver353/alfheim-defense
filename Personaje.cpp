@@ -2,6 +2,8 @@
 #include <iostream>
 #include <sstream>
 
+#define UPDATE_TICK_TIME 1000/15
+
 namespace Alfheim{
     
 
@@ -28,12 +30,26 @@ Personaje::Personaje(DatosJuegoRef datos) : _datos(datos) {
              mana = 100;
 }
 
-void Personaje::Pintar(float pt, float lastPersonajeX, float lastPersonajeY, float newPersonajeX, float newPersonajeY)
+void Personaje::Pintar(float pt)
 {
+    /* INTERPOLACION DE OBJETO */
+    float lastPersonajeX;
+    float lastPersonajeY;
+    float newPersonajeX = this->getPersonaje().getPosition().x;
+    float newPersonajeY = this->getPersonaje().getPosition().y;
+
+    if(_updateClock.getElapsedTime().asMilliseconds() > UPDATE_TICK_TIME){
+        lastPersonajeX = newPersonajeX;
+        lastPersonajeY = newPersonajeY;
+        _updateClock.restart();
+    }
+    
     float personajeX = lastPersonajeX*(1-pt) + newPersonajeX*pt;
     float personajeY = lastPersonajeY*(1-pt) + newPersonajeY*pt;
-               
+                      
    _personaje.setPosition(personajeX,personajeY);
+   /* INTERPOLACION DE OBJETO */
+   
     _datos->ventana.draw(_personaje);
     
     
@@ -126,13 +142,21 @@ bool Personaje::compruebaMuerte(){
      return _personaje;
  }
 
-/*void Personaje::cogePocion(int tipo, int cant){
+void Personaje::cogePocion(int t){
+
+    if(t==1){
     
-    if(tipo == 1){
-        vida+=cant;
-    }else if(tipo==2){
-        mana+=cant;
+        vida+=10;
+    }else{
+    
+        mana+=10;
     }
-}*/
+}
+
+void Personaje::lanzaHechizo(){
+    mana-=10;
+    if(mana < 0)
+        mana = 0;
+}
 
 }

@@ -1,6 +1,6 @@
 #include "Arma.h"
 #include <iostream>
-
+#define UPDATE_TICK_TIME 1000/15
 namespace Alfheim{
     
 
@@ -15,9 +15,29 @@ Arma::Arma(DatosJuegoRef datos) : _datos(datos) {
 }
 
 
-void Arma::Pintar()
+void Arma::Pintar(float pt)
 {
     for(unsigned short int i = 0; i < armaSprites.size(); i++){
+    
+    /* INTERPOLACION DE OBJETO */
+    float lastArmaX;
+    float lastArmaY;
+    float newArmaX = armaSprites.at(i).getPosition().x;
+    float newArmaY = armaSprites.at(i).getPosition().y;
+
+    if(_updateClock.getElapsedTime().asMilliseconds() > UPDATE_TICK_TIME){
+        lastArmaX = newArmaX;
+        lastArmaY = newArmaY;
+        _updateClock.restart();
+    }
+    
+    float armaX = lastArmaX*(1-pt) + newArmaX*pt;
+    float armaY = lastArmaY*(1-pt) + newArmaY*pt;
+                      
+   armaSprites.at(i).setPosition(armaX,armaY);
+   /* INTERPOLACION DE OBJETO */  
+        
+        
     _datos->ventana.draw(armaSprites.at(i));
 
     }
@@ -37,7 +57,7 @@ void Arma::Spawn(char dir, float x, float y)
              arma.setTextureRect(sf::IntRect(0*333, 0*333, 333, 333));
              // Lo dispongo en su posicion en la pantalla
              arma.setPosition(x, y);
-             std::cout << dire << std::endl;
+           //  std::cout << dire << std::endl;
              arma.setScale(0.2,0.2);
              int arr[] = {0,0};
              if(dire == 'u'){
@@ -89,7 +109,7 @@ void Arma::Update(float dt)
     } 
    
               if(clock.getElapsedTime().asSeconds() > 0.05){
-                std::cout<<animate<<std::endl;
+               // std::cout<<animate<<std::endl;
                 animate++;
                 if(animate > 5) {animate = 0;}
                 clock.restart();
@@ -118,5 +138,7 @@ const std::vector<sf::Sprite> &Arma::GetSprites() const
 {
     return armaSprites;
 }
+
+
 
 }

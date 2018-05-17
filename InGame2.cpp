@@ -1,33 +1,27 @@
 #pragma once
 
-#include <sstream>
+
 #include "InGame2.h"
 #include "MenuMuerte.h"
 #include "MenuFinal.h"
 #include "Menu.h"
 #include <iostream>
-#include <math.h>
-#include <algorithm>
-#define UPDATE_TICK_TIME 1000/15
+
+
 
 namespace Alfheim
 {
    
        InGame2::InGame2(DatosJuegoRef datos) : _datos(datos)
        {
-           level1 = true;
-           level2 = false;
+           level1 = false;
+           level2 = true;
            nivel2 = new Nivel2(_datos);
            const char * torre = "CiudadRuinas.tmx";
            nivel2->setMapa(torre);
            nivel2->setBloques(); 
            
-           if(level1){
-           posPocionesVida = nivel2->getMapa()->getPosPocionesVida();
-           numPocionesVida = nivel2->getMapa()->getNumPocionesVida();
-           posPocionesMana = nivel2->getMapa()->getPosPocionesMana();
-           numPocionesMana = nivel2->getMapa()->getNumPocionesMana();
-           }
+           
             
        }
         
@@ -35,47 +29,55 @@ namespace Alfheim
         {
            
             personaje = new Personaje(_datos);
-            posPJ = personaje->getPosicion();
-            recPJ = personaje->getRect();
-            
+                      
             arma = new Arma(_datos);
             
-           /*INTERFAZ*/
+            personaje->setMana(personaje->getMana()+20);
+            personaje->setVida(personaje->getVida()+50);
+       
+            /*INTERFAZ*/
             hud = new Hud(_datos);
             hud->SetPuntos(personaje->getPuntos()); 
             hud->SetMana(personaje->getMana());
             hud->SetVida(personaje->getVida());
             
-            /*POCIONES*/
-            pVida = new Pocion[numPocionesVida];
-            for(int i = 0; i < numPocionesVida && pVida!=NULL; i++){
-                
-                pVida[i].setPocion(posPocionesVida[i],1);
-               // std::cout << "set poti"<<posPocionesVida[i].x << posPocionesVida[i].y<< std::endl;
-            
-            }
-            
-            pMana = new Pocion[numPocionesMana];
-            for(int i = 0; i < numPocionesMana; i++){
-                
-                pMana[i].setPocion(posPocionesMana[i],2);
-               // std::cout << "set poti"<<posPocionesVida[i].x << posPocionesVida[i].y<< std::endl;
-            
-            }
-            
+            if(level2){
             /*ENEMIGOS*/
             sf::Vector2f posEnemy;
-            posEnemy.x = 200;
-            posEnemy.y = 120;
-            enemy = new Enemigo(_datos,1,posEnemy);
+            posEnemy.x = 400;
+            posEnemy.y = 430;
+            enemy = new Enemigo(_datos,1,posEnemy,nivel2->getMapa(),2);
             
-            //enemy->setEnemigo(1,posEnemy);
+            /*POCIONES*/
+                posPV = new sf::Vector2f[5];
+                posPV[0].x = 20;
+                posPV[0].y = 260;
+                pV1 = new Pocion(_datos,1,posPV[0]);
+                
+                posPV[1].x = 600;
+                posPV[1].y = 320;
+                pV2 = new Pocion(_datos,1,posPV[1]);
+                
+                posPM =  new sf::Vector2f[5];
+                posPM[0].x = 320;
+                posPM[0].y = 245;
+                pM1 = new Pocion(_datos,2,posPM[0]);
+                
+                posPM[1].x = 70;
+                posPM[1].y = 100;
+                pM2 = new Pocion(_datos,2,posPM[1]);
+                
+                posPM[2].x = 600;
+                posPM[2].y = 230;
+                pM3 = new Pocion(_datos,2,posPM[2]);
+            }
+            
            
         }
         
         void InGame2::ManejarEventos()
         {
-            if(level1){
+            if(level2){
                      
             sf::Event event;
             while(_datos->ventana.pollEvent(event))
@@ -88,16 +90,12 @@ namespace Alfheim
                 break;
                 
                 case sf::Event::KeyPressed:
-                    if(event.key.code == sf::Keyboard::P){
-                        // prueba puntos para ver si actualiza
-                        personaje->setPuntos(100);
-                    
-                    }
-                    if(event.key.code == sf::Keyboard::M){
+                  if(event.key.code == sf::Keyboard::M){
                         // prueba pantalla de muerte
                         personaje->setVida(0);
                     
                     }
+                  
                     if(event.key.code == sf::Keyboard::F){
                         // prueba pantalla de fin de partida
                         _datos->state.AddEJ(JuegoStateRef(new MenuFinal(_datos)),true);
@@ -117,23 +115,28 @@ namespace Alfheim
                             std::cout << "ya no soy invencible "<< std::endl;
                             personaje->setInvencible(false);
                         }
+                      
+                      
                     
                     }
                     
+                    
+                    
                    
                     if(event.key.code == sf::Keyboard::Right){
-                       // std::cout << "peta ants right "<< std::endl;
-                            
-                       // posPJ = personaje->getPosicion();
-                       // std::cout << "peta dsps right "<< std::endl;
                         int x = (int)floor(posPJ.x);
                         int y = (int)floor(posPJ.y);
-                        
-                        //recPJ = personaje->getRect();
-                        //int x = (int)floor(recPJ.left);
-                        //int y = (int)floor(recPJ.top);
-                        if(level1 && nivel2->getMapa()->colision2(x,y,4))
+                        lastDir='r';
+                        recPJ = personaje->getRect();
+                       
+                        if(level2 && nivel2->getMapa()->colision2(recPJ,x,y,dire) )
+                        {    
                             std::cout << "choca "<< std::endl;
+                            if(lastDir != dire){
+                                personaje->Girar(1,xs,ys);
+                                dire = 'r';
+                            }
+                        }
                         else{
                             if(pasos.getElapsedTime().asSeconds() > 0.07f){
                                 if(xs < 8) xs++;
@@ -152,14 +155,20 @@ namespace Alfheim
                     }
                     
                      if(event.key.code == sf::Keyboard::Left){
-                       //  posPJ = personaje->getPosicion();
+                       
                          int x = (int)floor(posPJ.x);
                         int y = (int)floor(posPJ.y);
-                         //recPJ = personaje->getRect();
-                        //int x = (int)floor(recPJ.left);
-                       // int y = (int)floor(recPJ.top);
-                        if(level1 && nivel2->getMapa()->colision2(x,y,3))
+                         recPJ = personaje->getRect();
+                         lastDir='l';
+                        
+                        if(level2 && nivel2->getMapa()->colision2(recPJ,x,y,dire))
+                        {    
                             std::cout << "choca "<< std::endl;
+                            if(lastDir != dire){
+                                personaje->Girar(2,xs,ys);
+                                dire = 'l';
+                            }
+                        }
                         else{
                             if(pasos.getElapsedTime().asSeconds() > 0.07f){
                                   if(xs < 8) xs++;
@@ -176,14 +185,19 @@ namespace Alfheim
                      }
                         
                      if(event.key.code ==  sf::Keyboard::Up){
-                        // posPJ = personaje->getPosicion();
-                        int x = (int)floor(posPJ.x);
+                         int x = (int)floor(posPJ.x);
                         int y = (int)floor(posPJ.y);
-                        // recPJ = personaje->getRect();
-                        //int x = (int)floor(recPJ.left);
-                        //int y = (int)floor(recPJ.top);
-                        if(level1 && nivel2->getMapa()->colision2(x,y,1))
+                         recPJ = personaje->getRect();
+                         lastDir='u';
+                        
+                       if(level2 && nivel2->getMapa()->colision2(recPJ,x,y,dire))
+                        {    
                             std::cout << "choca "<< std::endl;
+                            if(lastDir != dire){
+                                personaje->Girar(3,xu,yu);
+                                dire = 'u';
+                            }
+                        }
                         else{
                             if(pasos.getElapsedTime().asSeconds() > 0.07f){
                                   if(xu < 4) xu++;
@@ -200,14 +214,19 @@ namespace Alfheim
                      }
                         
                        if(event.key.code ==  sf::Keyboard::Down){
-                         //  posPJ = personaje->getPosicion();
-                          int x = (int)floor(posPJ.x);
+                           int x = (int)floor(posPJ.x);
                         int y = (int)floor(posPJ.y);
-                        //   recPJ = personaje->getRect();
-                        //int x = (int)floor(recPJ.left);
-                       // int y = (int)floor(recPJ.top);
-                        if(level1 && nivel2->getMapa()->colision2(x,y,2))
+                        recPJ = personaje->getRect();
+                        lastDir='d';
+                      
+                       if(level2 && nivel2->getMapa()->colision2(recPJ,x,y,dire))
+                        {    
                             std::cout << "choca "<< std::endl;
+                            if(lastDir != dire){
+                                personaje->Girar(4,xd,yd);
+                                dire = 'd';
+                            }
+                        }
                         else{
                             if(pasos.getElapsedTime().asSeconds() > 0.07f){
                                   if(xd < 4) xd++;
@@ -225,9 +244,12 @@ namespace Alfheim
                        }
                     
                     if(event.key.code == sf::Keyboard::Space){
-                        arma->setFiring(true);
-                        arma->Spawn(dire,personaje->getPersonaje().getPosition().x, personaje->getPersonaje().getPosition().y);
-                    
+                        if(personaje->getMana() >=10){
+                            arma->setFiring(true);
+                            arma->Spawn(dire,personaje->getPersonaje().getPosition().x, personaje->getPersonaje().getPosition().y);
+
+                            personaje->lanzaHechizo();
+                        }
                     } 
                        if(event.key.code == sf::Keyboard::Escape)
                             _datos->ventana.close();
@@ -253,7 +275,7 @@ namespace Alfheim
                 
             }
             
-            if(level1 && _clock.getElapsedTime().asSeconds() > 0.05f){
+            if(level2 && _clock.getElapsedTime().asSeconds() > 0.05f){
                   // std::cout << "updatin "<< std::endl;
             hud->SetPuntos(personaje->getPuntos()); 
             hud->SetMana(personaje->getMana());
@@ -261,67 +283,92 @@ namespace Alfheim
              //std::cout << "peya update "<< std::endl;
           //  posPJ = personaje->getPosicion();
             posPJ = personaje->getPosicion();
+            
+           
+            
             /*  CAMBIO ESTADOS DE MENU */
             if( personaje->compruebaMuerte()){
-                _datos->state.AddEJ(JuegoStateRef(new MenuMuerte(_datos)),true);
+                _datos->state.AddEJ(JuegoStateRef(new MenuMuerte(_datos,2)),true);
             }
+            
+            
+            
                    
             }
             
-            if(personaje->getPersonaje().getPosition().y <= 0 && level1){
-                level1 = false;
-                level2 = true;
-                  //delete mapa;
-                  _datos->state.AddEJ(JuegoStateRef(new InGame2(_datos)),true);
-       
+            //IA enemigo
+            enemy->caminar();
+            
+            
+            if(personaje->getPersonaje().getPosition().y <= 0 && level2){
+                
+                  _datos->state.AddEJ(JuegoStateRef(new MenuFinal(_datos)),true);
             }
+            
+             /*Eliminando sprites de pociones al cogerlas*/
+            if(pV1->getSprite().getGlobalBounds().intersects(personaje->getRect()))
+            {       personaje->cogePocion(1);
+                    pV1->elimina();
+
+            }
+            if(pV2->getSprite().getGlobalBounds().intersects(personaje->getRect()))
+            {       personaje->cogePocion(1);
+                    pV2->elimina();
+
+            }
+            if(pM1->getSprite().getGlobalBounds().intersects(personaje->getRect()))
+            {       personaje->cogePocion(2);
+                    pM1->elimina();
+
+            }
+            if(pM2->getSprite().getGlobalBounds().intersects(personaje->getRect()))
+            {       personaje->cogePocion(2);
+                    pM2->elimina();
+
+            }
+            if(pM3->getSprite().getGlobalBounds().intersects(personaje->getRect()))
+            {       personaje->cogePocion(2);
+                    pM3->elimina();
+
+            }
+            
+            /*TRAMPAS PISADAS*/
+            if(level2 && nivel2->pisaTrampa(posPJ.x, posPJ.y)){
+                
+                 _datos->state.AddEJ(JuegoStateRef(new MenuMuerte(_datos,2)),true);
+            }
+            
+
         }
         
-        void InGame2::Render(float dt)
+        void InGame2::Render(float pt)
         {
             _datos->ventana.clear();
-             if(level1){
-            /*Interpolacion de objetos, de momento personaje*/
-               float pt = std::min(1.f, this->_updateClock.getElapsedTime().asMilliseconds() > UPDATE_TICK_TIME 
-                ? (float)this->_updateClock.getElapsedTime().asMilliseconds(): UPDATE_TICK_TIME );
             
-               float lastPersonajeX;
-               float lastPersonajeY;
-               float newPersonajeX = personaje->getPersonaje().getPosition().x;
-               float newPersonajeY = personaje->getPersonaje().getPosition().y;
-               
-               if(_updateClock.getElapsedTime().asMilliseconds() > UPDATE_TICK_TIME){
-                   lastPersonajeX = newPersonajeX;
-                   lastPersonajeY = newPersonajeY;
-                   _updateClock.restart();
-               }
-             
-            /*Interpolacion de objetos, de momento personaje*/
+              
             
             nivel2->getMapa()->dibujarMapa(_datos->ventana);
-                                   
-            for(int i = 0; i < numPocionesVida && level1; i++){
-                _datos->ventana.draw( pVida[i].getSprite());
-               // pVida[i].Pintar();
-            }
             
-            for(int i = 0; i < numPocionesMana && level1; i++){
-                _datos->ventana.draw( pMana[i].getSprite());
-               // pVida[i].Pintar();
-            }
+            pV1->Pintar();
+             pV2->Pintar();
+             
+             pM1->Pintar();
+             pM2->Pintar();
+            pM3->Pintar();
             
-           
-            enemy->Pintar();
-            //pocPrueba->Pintar();
+            
+            
+          
             _datos->ventana.draw(hud->GetTxtVida());
             _datos->ventana.draw(hud->GetTxtMana());
             _datos->ventana.draw(hud->GetTxtPuntos());
             
-            arma->Pintar();
-            nivel2->PintarBloques();
+            arma->Pintar(pt);
+            nivel2->PintarBloques(_datos->ventana, pt);
             
-            personaje->Pintar(pt, lastPersonajeX,lastPersonajeY,newPersonajeX,newPersonajeY); 
-            }
+            personaje->Pintar(pt); 
+            enemy->Pintar(pt);
+            
             
             _datos->ventana.display();
         }

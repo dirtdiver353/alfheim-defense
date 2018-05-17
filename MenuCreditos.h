@@ -19,7 +19,7 @@ namespace Alfheim
         
         void ManejarEventos();
         void Update(float dt);
-        void Render(float dt);
+        void Render(float pt);
         
         void MoveUp();
         void MoveDown();

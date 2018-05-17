@@ -2,14 +2,14 @@
 #include <iostream>
 #include <sstream>
 
-namespace Alfheim{
-    
+#define UPDATE_TICK_TIME 1000/15
 
-Bloque::Bloque(DatosJuegoRef datos) : _datos(datos) {
+Bloque::Bloque() {
     
     
             
 }
+
 void Bloque::Init( int x, int y){
     if (!_bloqueTexture.loadFromFile("resources/bloque.png"))
             {
@@ -28,55 +28,49 @@ void Bloque::Init( int x, int y){
              
 }
 
-void Bloque::Pintar()
+void Bloque::Pintar(sf::RenderWindow& window, float pt)
 {
+    /* INTERPOLACION DE OBJETO */
+    float lastBloqueX;
+    float lastBloqueY;
+    float newBloqueX = this->getBloque().getPosition().x;
+    float newBloqueY = this->getBloque().getPosition().y;
+
+    if(_updateClock.getElapsedTime().asMilliseconds() > UPDATE_TICK_TIME){
+        lastBloqueX = newBloqueX;
+        lastBloqueY = newBloqueY;
+        _updateClock.restart();
+    }
+    
+    float bloqueX = lastBloqueX*(1-pt) + newBloqueX*pt;
+    float bloqueY = lastBloqueY*(1-pt) + newBloqueY*pt;
+                      
+   _bloque.setPosition(bloqueX,bloqueY);
+   /* INTERPOLACION DE OBJETO */
    
-    _datos->ventana.draw(_bloque);
+    window.draw(_bloque);
     
     
 }
 
-void Bloque::Girar(int dl, sf::Sprite personaje)
+void Bloque::Girar(int dl, sf::Sprite bloque)
 {
     int kVel = 4;
-         if(dl == 1 
-            && personaje.getPosition().x
-            == _bloque.getPosition().x-16
-            && (personaje.getPosition().y
-            >=  _bloque.getPosition().y-40
-            && personaje.getPosition().y
-            <=  _bloque.getPosition().y-16 )){
+        
+      if(dl == 1 && _bloque.getGlobalBounds().contains(bloque.getPosition().x, bloque.getPosition().y+24)){
                 
              _bloque.move(kVel,0);}
     
-        if(dl == 2
-            && personaje.getPosition().x
-            == _bloque.getPosition().x+16
-            && (personaje.getPosition().y
-            >=  _bloque.getPosition().y-40
-            && personaje.getPosition().y
-            <=  _bloque.getPosition().y-16 )){
-             
+        if(dl == 2 && _bloque.getGlobalBounds().contains(bloque.getPosition().x, bloque.getPosition().y+24 )){
+                
             _bloque.move(-kVel,0);}
     
-        if(dl == 3
-           && personaje.getPosition().x
-           >= _bloque.getPosition().x-16
-           && personaje.getPosition().x
-           <= _bloque.getPosition().x+16
-           && personaje.getPosition().y
-           ==  _bloque.getPosition().y-16 ){
-        
+        if(dl == 3 && _bloque.getGlobalBounds().contains(bloque.getPosition().x, bloque.getPosition().y+24 )){
+                
             _bloque.move(0,-kVel);}
     
-        if(dl == 4
-           && personaje.getPosition().x
-           >= _bloque.getPosition().x-16
-           && personaje.getPosition().x
-           <= _bloque.getPosition().x+16
-           && personaje.getPosition().y
-           ==  _bloque.getPosition().y-40 ){
-                                   
+        if(dl == 4 && _bloque.getGlobalBounds().contains(bloque.getPosition().x, bloque.getPosition().y+24 )){
+                             
             _bloque.move(0,kVel);}
      
 }
@@ -90,4 +84,3 @@ sf::Sprite Bloque::getBloque(){
      return _bloque;
  }
 
-}

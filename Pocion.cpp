@@ -8,9 +8,10 @@ namespace Alfheim
 Pocion::Pocion()
 {}
 
-/*Pocion::Pocion(DatosJuegoRef datos, int t) : _datos(datos) {
-    tipo = t;
-    
+ Pocion::Pocion(DatosJuegoRef datos, int tipo, sf::Vector2f pos) : _datos(datos) {
+this->tipo = tipo;
+
+
     if(tipo == 1){ // pocion vida
         cantidad = 100;
          if (!pocionTexture.loadFromFile("resources/vida.png"))
@@ -29,15 +30,13 @@ Pocion::Pocion()
 
            pocionSprite.setTexture(pocionTexture);
     }
-
-    //Le pongo el centroide donde corresponde
-   // pocionSprite.setOrigin(170/2,150/2);
-    //Cojo el sprite que me interesa por defecto del sheet
-    pocionSprite.setTextureRect(sf::IntRect(0*170, 0*150, 170, 150));
-    pocionSprite.setScale(0.75,0.75);
-    // Lo dispongo en su posicion en la pantalla
-   // pocionSprite.setPosition(x, y);
-}*/
+    //pocionSprite.setTextureRect(sf::IntRect(0*170, 0*150, 170, 150));
+    pocionSprite.setScale(0.50,0.50);
+    pocionSprite.setPosition(pos.x, pos.y);
+    
+    cantidad = 10;
+    
+    }
 
 void Pocion::setPocion(sf::Vector2f pos, int t){
    tipo = t;
@@ -65,11 +64,9 @@ void Pocion::setPocion(sf::Vector2f pos, int t){
     pocionSprite.setPosition(pos.x, pos.y);
 
 }
-
-/*void Pocion::Pintar(){
+void Pocion::Pintar(){
    _datos->ventana.draw(pocionSprite);
 }
-*/
 
 sf::Sprite Pocion::getSprite(){
     return pocionSprite;
@@ -85,6 +82,8 @@ int Pocion::getTipo(){
     return tipo;
 }
 
-
+void Pocion::elimina(){
+pocionSprite.setTextureRect(sf::IntRect(0*170, 0*150, 0, 0));
+}
 
 }

@@ -12,6 +12,7 @@
 #include "Arma.h"
 
 
+
 namespace Alfheim
 {
     class InGame : public State
@@ -23,7 +24,7 @@ namespace Alfheim
         
         void ManejarEventos();
         void Update(float dt);
-        void Render(float dt);
+        void Render(float pt);
         
     private:
         DatosJuegoRef _datos;
@@ -42,22 +43,22 @@ namespace Alfheim
         bool level1, level2;
         Hud *hud;
         
-        
+        char lastDir;
        
         
         
-      sf::Vector2f* posPocionesVida;
-      int numPocionesVida;
-      sf::Vector2f* posPocionesMana;
-      int numPocionesMana;
-      Pocion *pVida;
-      Pocion *pMana;
+     
       
       sf::Vector2f posPJ;
       
       sf::FloatRect recPJ;
       
-      Enemigo *enemy;
+     Enemigo *enemy;
+     Pocion *pV1, *pV2, *pV3;
+      Pocion *pM1, *pM2, *pM3;
+      
+      sf::Vector2f *posPV;
+      sf::Vector2f *posPM;
       
         
         

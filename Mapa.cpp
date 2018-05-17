@@ -140,8 +140,7 @@ void Mapa::leerMapa(){
    
     
     // Asigna sprites por capas a tilemapSprite 
-    numPocionesVida = 0;
-    numPocionesMana = 0;
+   
     
     for(int l=0; l<_numLayers; l++){
         for(int y=0; y<_height; y++){
@@ -154,30 +153,7 @@ void Mapa::leerMapa(){
                     cout<<"Error"<<endl;
                 }
                 else if(gid>0){   
-                    // PENDIENTE
-                    // Depende de capa dibujamos enemigos u objs
-                    if(l == 9){
-                        // capa enemigos
-                        
-                        
                     
-                    
-                    }else if ( l == 10){
-                    
-                        // capa pociones
-                        //compruebo GID
-                         
-                         if(gid == 997)
-                         {
-                             numPocionesVida++;
-                             //pocion vida
-                            // Pocion *pv = new Pocion(x,y,1);
-                         } else if ( gid == 998)
-                         {
-                             numPocionesMana++;
-                         }
-                        
-                    }
                     
                     
                     _tilemapSprite[l][y][x]=new sf::Sprite(_tilesetTexture,_tilesetSprite[gid].getTextureRect());
@@ -192,52 +168,7 @@ void Mapa::leerMapa(){
             }
         }
     }
-      std::cout << "num pociones vida: "<< numPocionesVida << std::endl;
-                            
-    posPocionesVida = new sf::Vector2f[numPocionesVida];
-    posPocionesMana = new sf::Vector2f[numPocionesMana];
-    int aux = 0;
-    int aux1 = 0;
-    
-    for(int t=0; t<_numLayers; t++){
-        for(int y=0; y<_height; y++){
-            for(int x=0; x<_width; x++){
-                if(_tilemapSprite[t][y][x]!=NULL){
-                    if(t == 9){
-                        // capa enemigos
-                        
-                        
-                    
-                    
-                    }else if ( t == 10){
-                    
-                        // capa pociones
-                        //compruebo GID
-                         int gid=_tilemap[t][y][x]-1;
-                         if(gid == 997)
-                         {
-                             
-                             posPocionesVida[aux].x = x*_tileWidth;
-                             posPocionesVida[aux].y = y*_tileHeigth;
-                             //std::cout << posPocionesVida[aux].x << " " << posPocionesVida[aux].y << std::endl;
-                             
-                             aux++;
-                             //pocion vida
-                            // Pocion *pv = new Pocion(x,y,1);
-                         } else if (gid == 998){
-                             posPocionesMana[aux1].x = x*_tileWidth;
-                             posPocionesMana[aux1].y = y*_tileHeigth;
-                             //std::cout << posPocionesVida[aux].x << " " << posPocionesVida[aux].y << std::endl;
-                             
-                             aux1++;
-                         }
-                        
-                    }
-                    
-                }
-            }
-        }
-    }
+     
     // INFO 
     cout<<endl;
     cout<<"Datos del mapa:"<<endl;
@@ -297,84 +228,158 @@ void Mapa::dibujarMapa(sf::RenderWindow& window){
 }
 
 
-sf::Vector2f* Mapa::getPosPocionesVida(){
-    return posPocionesVida;
-    
-
-}
-
-int Mapa::getNumPocionesVida(){
-    return numPocionesVida;
-}
 
 
-sf::Vector2f* Mapa::getPosPocionesMana(){
-    return posPocionesMana;
 
-}
 
-int Mapa::getNumPocionesMana(){
-    return numPocionesMana;
-}
-
-bool Mapa::colision(int x, int y){
-   // std::cout << "peta encolision "<< std::endl;
-    bool choque = false;
-    //std::cout << "peta ants bool false "<< std::endl;
-    x = x/_tileWidth ;
-    y = y/_tileHeigth;
-    std::cout << "x y tilemap "<<  x << " "<<y<< std::endl;
-    /*int gid=_tilemap[t][y][x]-1
-    if(_tilemap[3][y][x]-1>0)
-     //   choque = true;
-    if (_tilemap[4][y][x]-1>0)
-        choque = true;
-    if (_tilemap[5][y][x]-1>0)
-        choque = true;
-    if (_tilemap[6][y][x]-1>0)
-        choque = true;
-    if (_tilemap[7][y][x]-1>0)
-        choque = true;*/
-    
-    //TIENE K DETECTAR CLISIONES DE LOS PIES 
-    // NO DEL CENTRO
-    
-        
-    
-                             
-    
-    return choque;
-
-}
-
-bool Mapa::colision2(int x, int y, int dir){
+bool Mapa::colision1(sf::FloatRect fr, int x, int y,char d){
     
  bool choque = false;
-    //std::cout << "peta ants bool false "<< std::endl;
- if(dir == 1){ //up
-     x = x/_tileWidth -1;
-    y = y/_tileHeigth ;
- }else if (dir == 2){ //down
-     x = x/_tileWidth +1;
-    y = y/_tileHeigth ;
- }else if (dir == 3){ //left
-     x = x/_tileWidth ;
-    y = y/_tileHeigth +1;
- }else{ //right
-     x = x/_tileWidth ;
-    y = y/_tileHeigth -1;
+
+    
+ 
+    x = x/_tileWidth ;
+    y = y/_tileHeigth;
+    
+    if(d=='d'){
+        y = y+4;
+    } else if (d=='r'){
+        x+=2;
+    } else if (d=='l'){
+        x-=2;
+    }
+    
+    if(x<= 0 ) 
+        return true;
+    else if (x >= _width)
+        return true;
+    else if (y>=_height-1)
+        return true;
+        
+ if(_tilemapSprite[3][y][x]!=NULL)
+ {
+    if(_tilemapSprite[3][y][x]->getGlobalBounds().intersects(fr))
+        choque = true;
  }
     
-    std::cout << "x y tilemap "<<  x << " "<<y<< std::endl;
-    //int gid=_tilemap[t][y][x]-1
-   /* if(_tilemap[3][y][x]-1>0)
+ if(_tilemapSprite[4][y][x]!=NULL){
+    if (_tilemapSprite[4][y][x]->getGlobalBounds().intersects(fr))
+           choque = true;
+ }
+    
+ if(_tilemapSprite[5][y][x]!=NULL){
+    if (_tilemapSprite[5][y][x]->getGlobalBounds().intersects(fr))
         choque = true;
-    if (_tilemap[4][y][x]-1>0)
-        choque = true;
-    if (_tilemap[5][y][x]-1>0)
-        choque = true;
-    */
+ }
+    
     return choque;
  
 }
+
+bool Mapa::colision2(sf::FloatRect fr, int x, int y,char d){
+    
+ bool choque = false;
+
+    
+ 
+    x = x/_tileWidth ;
+    y = y/_tileHeigth;
+    
+   /* if(d=='d'){
+        y = y+4;
+    } else if (d=='r'){
+        x+=2;
+    } else if (d=='l'){
+        x-=2;
+    }*/
+    
+    if(x<= 0 ) 
+        return true;
+    else if (x >= _width)
+        return true;
+    else if (y>=_height-1)
+        return true;
+        
+ if(_tilemapSprite[1][y][x]!=NULL)
+ {
+    if(_tilemapSprite[1][y][x]->getGlobalBounds().intersects(fr))
+        choque = true;
+ }
+    
+
+    
+    return choque;
+ 
+}
+
+sf::Vector2f * Mapa::getTrampas(){
+    int aux = 0;
+    
+    //cuento las trampas que hay
+    for(int t=0; t<_numLayers; t++){
+        for(int y=0; y<_height; y++){
+            for(int x=0; x<_width; x++){
+                if(_tilemapSprite[t][y][x]!=NULL){
+                     if ( t == 0){
+                    
+                        // capa pociones
+                        //compruebo GID
+                         int gid=_tilemap[t][y][x]-1;
+                         if(gid == 2253 || gid == 2254 || gid == 2333 || gid == 2334
+                            || gid == 1567 || gid == 1568 || gid == 1647 || gid == 1648
+                            || gid == 2945 || gid == 2946 || gid == 3025 || gid == 3026)
+                         {
+                             
+                             aux++;
+                         }
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    numTrampas = aux;
+    posTrampas = new sf::Vector2f[numTrampas];
+    std::cout << numTrampas << std::endl;
+    aux = 0;
+    for(int t=0; t<_numLayers; t++){
+        for(int y=0; y<_height; y++){
+            for(int x=0; x<_width; x++){
+                if(_tilemapSprite[t][y][x]!=NULL){
+                     if ( t == 0){
+                    
+                        // capa pociones
+                        //compruebo GID
+                         int gid=_tilemap[t][y][x]-1;
+                         if(gid == 2253 || gid == 2254 || gid == 2333 || gid == 2334
+                            || gid == 1567 || gid == 1568 || gid == 1647 || gid == 1648
+                            || gid == 2945 || gid == 2946 || gid == 3025 || gid == 3026)
+                         {
+                            //
+                             
+                          
+                             posTrampas[aux].x = y;
+                             posTrampas[aux].y = x;
+                             std::cout << posTrampas[aux].x << " " << posTrampas[aux].y << std::endl;
+                             aux++;
+                         }
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    return posTrampas;
+    
+    
+}
+
+int Mapa::getNumTrampas(){
+    return numTrampas;
+}
+    
 

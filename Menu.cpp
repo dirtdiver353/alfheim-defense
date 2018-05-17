@@ -156,7 +156,7 @@ namespace Alfheim
         {
             
         }
-        void Menu::Render(float dt)
+        void Menu::Render(float pt)
         {
                        
             _datos->ventana.clear();

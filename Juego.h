@@ -21,7 +21,8 @@ namespace Alfheim
         Juego(int ancho, int alto, std::string titulo);
     private:
         const float dt = 1.0f / 60.0f;
-        sf::Clock _clock;
+        sf::Clock _clock;        
+        sf::Clock _updateClock;
         DatosJuegoRef _datos = std::make_shared<DatosJuego>();
         void Iniciar();
     };

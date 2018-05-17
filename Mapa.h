@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Mapa.h
- * Author: Victoria Hodelín Taranova
- *
- * Created on 22 de marzo de 2017, 18:09
- */
-
 #ifndef MAPA_H
 #define MAPA_H
 #include <SFML/Graphics.hpp>
@@ -23,15 +10,14 @@ public:
     virtual ~Mapa();    
     void leerMapa();
     void dibujarMapa(sf::RenderWindow &window); 
-    bool colision(int x, int y);
+     
+    bool colision1(sf::FloatRect fr, int x, int y,char d);
+    bool colision2(sf::FloatRect fr, int x, int y,char d);
     
-    bool colision2(int x, int y, int dir);
+    sf::Vector2f * getTrampas();
+    int getNumTrampas();
     
-    sf::Vector2f *getPosPocionesVida();
-    int getNumPocionesVida();
     
-    sf::Vector2f *getPosPocionesMana();
-    int getNumPocionesMana();
     
     
  
@@ -52,15 +38,13 @@ private:
     sf::Texture _tilesetTexture;
     sf::Texture fondoTexture;
     
-    sf::Vector2f *posPocionesVida;
-    int numPocionesVida;
+    int numTrampas;
+    sf::Vector2f * posTrampas;
     
-    sf::Vector2f *posPocionesMana;
-    int numPocionesMana;
+    
        
     
     
 };
 
 #endif	/* CARGAR_H */
-

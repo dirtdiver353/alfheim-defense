@@ -18,8 +18,9 @@ namespace Alfheim
         void setBloque(int i, int x, int y);
         void setBloques();
         Bloque *getBloque(int i);
-        void PintarBloques();
-        void MoverBloques(int i, sf::Sprite personaje);
+        void PintarBloques(sf::RenderWindow& window, float pt);
+        void MoverBloques(int x, int i, sf::Sprite personaje);
+        int ColisionBloque(int dire);
         
     private:
         DatosJuegoRef _datos;        

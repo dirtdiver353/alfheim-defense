@@ -15,6 +15,8 @@ void Nivel2::setMapa(const char* nombre){
     
     mapa = new Mapa(nombre);
     mapa->leerMapa();
+    posTrampas = mapa->getTrampas();
+    numTrampas = mapa->getNumTrampas();
 }
 
 Mapa *Nivel2::getMapa(){
@@ -31,7 +33,7 @@ void Nivel2::setBloques(){
 }
 
 void Nivel2::setBloque(int i, int x, int y){
-    bloques[i] = new Bloque(_datos);
+    bloques[i] = new Bloque();
     bloques[i]->Init(x,y);
 }
 
@@ -48,13 +50,33 @@ void Nivel2::MoverBloques(int i, sf::Sprite personaje){
      this->getBloque(5)->Girar(i,personaje);
                                 
 }
-void Nivel2::PintarBloques(){    
-            this->getBloque(0)->Pintar();
-            this->getBloque(1)->Pintar();
-            this->getBloque(2)->Pintar();
-            this->getBloque(3)->Pintar();
-            this->getBloque(4)->Pintar();
-            this->getBloque(5)->Pintar();
+void Nivel2::PintarBloques(sf::RenderWindow& window, float pt){    
+            this->getBloque(0)->Pintar(window, pt);
+            this->getBloque(1)->Pintar(window, pt);
+            this->getBloque(2)->Pintar(window, pt);
+            this->getBloque(3)->Pintar(window, pt);
+            this->getBloque(4)->Pintar(window, pt);
+            this->getBloque(5)->Pintar(window, pt);
+}
+
+bool Nivel2::pisaTrampa(int x, int y){
+
+    
+    
+    
+    
+    x = (int)floor(x);
+    y = (int)floor(y);
+    
+    for(int i = 0;  i < numTrampas; i++){
+        int aux1 = (int)floor(posTrampas[i].x*8);
+        int aux2 =  (int)floor(posTrampas[i].y*8);
+        if(y == aux1 && x == aux2)
+            return true;
+        
+    }
+    
+    return false;
 }
 
 }

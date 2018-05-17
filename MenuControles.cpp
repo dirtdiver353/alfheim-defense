@@ -61,12 +61,12 @@ namespace Alfheim
     c2.setColor(sf::Color::White);
     c3.setColor(sf::Color::White);
     
-    c1.setString("[Up] [Down] [Left] [Right] Movimiento");
-    c2.setString("[Espace] Ataque");
+    c1.setString("[Arriba] [Abajo] [Izq] [Dcha] Movimiento");
+    c2.setString("[Espacio] Ataque");
     c3.setString("[Q] Salir del juego");
     
-    c1.setPosition(sf::Vector2f(640/2-230, 190));
-    c2.setPosition(sf::Vector2f(640/2-90, 210));
+    c1.setPosition(sf::Vector2f(640/2-245, 190));
+    c2.setPosition(sf::Vector2f(640/2-100, 210));
     c3.setPosition(sf::Vector2f(640/2-120, 230));
     
     
@@ -154,7 +154,7 @@ namespace Alfheim
 
     }
     
-    void MenuControles::Render(float dt)
+    void MenuControles::Render(float pt)
     {
 
         _datos->ventana.clear();

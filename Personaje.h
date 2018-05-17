@@ -10,7 +10,7 @@ namespace Alfheim
     {
     public:
         Personaje( DatosJuegoRef datos);
-        void Pintar(float pt, float lastPersonajeX, float lastPersonajeY, float newPersonajeX, float newPersonajeY);
+        void Pintar(float pt);
 
         void Update(float dt);
         void Girar(int dl, int x, int y);
@@ -34,13 +34,17 @@ namespace Alfheim
         sf::Vector2f getPosicion();
         sf::FloatRect getRect();
         sf::Sprite getPersonaje();
+        void cogePocion(int t);
 //        void cogePocion(int tipo, int cant, int xpoti, int ypoti);
+        
+        void lanzaHechizo();
         
     private:
         DatosJuegoRef _datos;
         sf::Texture _personajeTexture;
         sf::Sprite _personaje;
         sf::Clock clock;
+        sf::Clock _updateClock;
         
         int puntos;
         int mana;

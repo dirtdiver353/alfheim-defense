@@ -11,12 +11,13 @@ namespace Alfheim
     {
     public:
         Arma( DatosJuegoRef datos);
-        void Pintar();
+        void Pintar(float pt);
         void Update(float dt);
         void Spawn(char dir, float x, float y);
         void Borrar(int x);
         void setFiring(bool estado);
         const std::vector<sf::Sprite> &GetSprites() const;
+        
         
     private:
         DatosJuegoRef _datos;        
@@ -25,6 +26,7 @@ namespace Alfheim
         std::vector<int> speedFire2;
         sf::Texture armaTexture;
         sf::Clock clock;
+        sf::Clock _updateClock;
         bool firing;
         int animate;
         char dire;

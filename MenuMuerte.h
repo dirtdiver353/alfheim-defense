@@ -13,13 +13,13 @@ namespace Alfheim
     class MenuMuerte : public State
     {
     public:
-        MenuMuerte(DatosJuegoRef datos);
+        MenuMuerte(DatosJuegoRef datos, int nivel);
         
         void Init();
         
         void ManejarEventos();
         void Update(float dt);
-        void Render(float dt);
+        void Render(float pt);
         
         void MoveUp();
         void MoveDown();
@@ -38,7 +38,7 @@ namespace Alfheim
         sf::Font textFontTitle;
         sf::Text title;
         sf::Text titleShadow;
-       
+        int nivel;
 //        Musica* musica;
     };
 }

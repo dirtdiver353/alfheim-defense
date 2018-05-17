@@ -45,9 +45,11 @@ namespace Alfheim
                 
                 acumulador -= dt;
         }
-
+            float percentTick = std::min(1.f, this->_updateClock.getElapsedTime().asMilliseconds() > UPDATE_TICK_TIME 
+               ? (float)this->_updateClock.getElapsedTime().asMilliseconds(): UPDATE_TICK_TIME );
+            
             interpolacion = acumulador / dt;
-            this->_datos->state.GetActivoEJ()->Render(interpolacion);
+            this->_datos->state.GetActivoEJ()->Render(percentTick);
         }
     }
 }

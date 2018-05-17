@@ -20,12 +20,12 @@ class Pocion {
 public:
     Pocion();
    // Pocion(DatosJuegoRef datos, int t);
-    
+    Pocion(DatosJuegoRef datos, int tipo, sf::Vector2f pos);
     void setPocion(sf::Vector2f pos, int t);
-    //void Pintar();
+    void Pintar();
     void Update(float dt);
     void Eliminar();
-    
+    void elimina();
     int getCantidad();
     int getTipo();
     
@@ -35,7 +35,7 @@ public:
     sf::Sprite getSprite();
     
 private:
-   // DatosJuegoRef _datos;
+    DatosJuegoRef _datos;
     
     int tipo;
     int cantidad;

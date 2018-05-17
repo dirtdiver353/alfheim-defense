@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "InGame.h"
+#include "InGame2.h"
 #include "Musica.hpp"
 #include <iostream>
 
@@ -10,7 +11,7 @@
 
 namespace Alfheim
 {
-    MenuMuerte::MenuMuerte(DatosJuegoRef datos) : _datos(datos) 
+    MenuMuerte::MenuMuerte(DatosJuegoRef datos,int n) : _datos(datos) 
     {
         if(!textFont.loadFromFile("resources/fonts/clacon.ttf")
             || !textFontTitle.loadFromFile("resources/fonts/Morgan TwentyNine.ttf")){
@@ -25,6 +26,8 @@ namespace Alfheim
            // std::cout << "Error cargando la imagen fondo.png";
             exit(0);
         }    
+        
+        nivel = n;
             
     _background.setTexture(_backgroundTexture);
     _background.setScale(0.6,0.6);
@@ -106,7 +109,11 @@ namespace Alfheim
                                     switch(this->GetSelectedItem()){
                                         case 0:
                                             std::cout<< "vuelve a jugar nivel" << std::endl;
-                                             _datos->state.AddEJ(JuegoStateRef(new InGame(_datos)),true);
+                                            if(nivel == 1){
+                                                _datos->state.AddEJ(JuegoStateRef(new InGame(_datos)),true);
+                                            } else if (nivel == 2){
+                                                _datos->state.AddEJ(JuegoStateRef(new InGame2(_datos)),true);
+                                            }
        
                                             break; 
                                         case 1:
@@ -126,7 +133,7 @@ namespace Alfheim
 
     }
     
-    void MenuMuerte::Render(float dt)
+    void MenuMuerte::Render(float pt)
     {
 
         _datos->ventana.clear();
