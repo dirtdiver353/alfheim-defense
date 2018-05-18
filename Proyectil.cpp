@@ -44,6 +44,24 @@ void Proyectil::Pintar(float pt)
 
     }
 }
+bool Proyectil::IsFirstime(int i) const {
+            return firstime.at(i);
+        }
+
+        void Proyectil::SetFirstime(int i, bool firstime) {
+            this->firstime.at(i) = firstime;
+        }
+        
+ bool Proyectil::IsFiring() const {
+            return firing;
+        }
+float Proyectil::GetRandom() const {
+            return random;
+        }
+
+        void Proyectil::SetRandom(float random) {
+            this->random = random;
+        }
 
 sf::Clock Proyectil::GetFuego() const {
             return fuego;
@@ -68,14 +86,13 @@ void Proyectil::Spawn(sf::Sprite personaje, float x, float y)
              proyectil.setTextureRect(sf::IntRect(0*333, 0*333, 333, 333));
              // Lo dispongo en su posicion en la pantalla
              proyectil.setPosition(x, y);
-           //  std::cout << dire << std::endl;
              proyectil.setScale(0.2,0.2);
              float arr[] = {0,0};
            
                  arr[0]= std::cos(angulo2); arr[1]= std::sin(angulo2);
                  proyectil.rotate(angulo);
              
-             
+                 firstime.push_back(false); 
              speedFire1.push_back(arr[0]);
              speedFire2.push_back(arr[1]);
              proyectilSprites.push_back(proyectil);
@@ -97,6 +114,7 @@ void Proyectil::Update(float dt)
             proyectilSprites.erase(proyectilSprites.begin()+i);
              speedFire1.erase(speedFire1.begin()+i);             
              speedFire2.erase(speedFire2.begin()+i);
+             firstime.erase(firstime.begin()+i);
         }
         
         proyectilSprites.at(i).move(speedFire1.at(i),speedFire2.at(i));

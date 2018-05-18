@@ -13,7 +13,6 @@
 #include "Proyectil.h"
 
 
-
 namespace Alfheim
 {
     class InGame2 : public State

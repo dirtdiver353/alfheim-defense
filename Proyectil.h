@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Juego.h"
 #include <vector>
+#include <stdlib.h>
 
 namespace Alfheim
 {
@@ -19,11 +20,20 @@ namespace Alfheim
         const std::vector<sf::Sprite> &GetSprites() const;
         sf::Clock GetFuego() const;
         void SetFuego();
+        float GetRandom() const;
+        void SetRandom(float random);
+
+        bool IsFiring() const;
+
+        bool IsFirstime(int i) const ;
+
+        void SetFirstime(int i, bool firstime);
 
         
     private:
         DatosJuegoRef _datos;        
-        std::vector<sf::Sprite> proyectilSprites;          
+        std::vector<sf::Sprite> proyectilSprites;
+                std::vector<bool> firstime;   
         std::vector<float> speedFire1;
         std::vector<float> speedFire2;
         sf::Texture proyectilTexture;
@@ -33,5 +43,8 @@ namespace Alfheim
         bool firing;
         int animate;
         char dire;
+        float random=((float)(rand()%600+101))/100;
+                    
+
     };
 }

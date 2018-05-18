@@ -33,7 +33,9 @@ namespace Alfheim
             personaje = new Personaje(_datos);
             posPJ = personaje->getPosicion();
             recPJ = personaje->getRect();
-            
+            proyectil = new Proyectil(_datos);
+            proyectil1 = new Proyectil(_datos);
+            proyectil2 = new Proyectil(_datos);
             arma = new Arma(_datos);
             
            /*INTERFAZ*/
@@ -297,11 +299,81 @@ namespace Alfheim
         }
         void InGame::Update(float dt)
         {
+             std::vector<sf::Sprite> proyectilSprites = proyectil->GetSprites();
+                       
+            for(int i = 0; i < proyectilSprites.size();i++)
+            {
+                
+                if(!proyectil->IsFirstime(i) && personaje->getPersonaje().getGlobalBounds().contains(proyectilSprites.at(i).getPosition())){
+                    
+                      std::cout << "redu;cir salud de personaje" << std::endl;
+                      proyectil->SetFirstime(i,true);
+                }
+                
+            }
+            
+            
+            if(proyectil->GetFuego().getElapsedTime().asSeconds() > proyectil->GetRandom()){
+                
+                proyectil->setFiring(true);
+                proyectil->Spawn(personaje->getPersonaje(),enemy->getEnemigo().getPosition().x, enemy->getEnemigo().getPosition().y);
+                proyectil->setFiring(false); 
+                proyectil->SetFuego();
+                proyectil->SetRandom(((float)(rand()%600+101))/100);
+            }
+            
+              std::vector<sf::Sprite> proyectil1Sprites = proyectil1->GetSprites();
+                       
+            for(int i = 0; i < proyectil1Sprites.size();i++)
+            {
+                
+                if(!proyectil1->IsFirstime(i) && personaje->getPersonaje().getGlobalBounds().contains(proyectil1Sprites.at(i).getPosition())){
+                    
+                      std::cout << "redu;cir salud de personaje" << std::endl;
+                      proyectil1->SetFirstime(i,true);
+                }
+                
+            }
+            
+            
+            if(proyectil1->GetFuego().getElapsedTime().asSeconds() > proyectil1->GetRandom()){
+                
+                proyectil1->setFiring(true);
+                proyectil1->Spawn(personaje->getPersonaje(),enemy1->getEnemigo().getPosition().x, enemy1->getEnemigo().getPosition().y);
+                proyectil1->setFiring(false); 
+                proyectil1->SetFuego();
+                proyectil1->SetRandom(((float)(rand()%600+101))/100);
+            }
+            
+               std::vector<sf::Sprite> proyectil2Sprites = proyectil2->GetSprites();
+                       
+            for(int i = 0; i < proyectil2Sprites.size();i++)
+            {
+                
+                if(!proyectil2->IsFirstime(i) && personaje->getPersonaje().getGlobalBounds().contains(proyectil2Sprites.at(i).getPosition())){
+                    
+                      std::cout << "redu;cir salud de personaje" << std::endl;
+                      proyectil2->SetFirstime(i,true);
+                }
+                
+            }
+            
+            
+            if(proyectil2->GetFuego().getElapsedTime().asSeconds() > proyectil2->GetRandom()){
+                
+                proyectil2->setFiring(true);
+                proyectil2->Spawn(personaje->getPersonaje(),enemy2->getEnemigo().getPosition().x, enemy2->getEnemigo().getPosition().y);
+                proyectil2->setFiring(false); 
+                proyectil2->SetFuego();
+                proyectil2->SetRandom(((float)(rand()%600+101))/100);
+            }
             
             
             if(_clock.getElapsedTime().asSeconds() > 1.0){
                 arma->Update(dt); 
-                
+                 proyectil->Update(dt); 
+                 proyectil1->Update(dt); 
+                 proyectil2->Update(dt); 
             }
             
             if(level1 && _clock.getElapsedTime().asSeconds() > 0.05f){
@@ -423,7 +495,9 @@ namespace Alfheim
             
             arma->Pintar(pt);
             nivel1->PintarBloques(_datos->ventana, pt);
-            
+            proyectil->Pintar(pt);
+            proyectil1->Pintar(pt);
+            proyectil2->Pintar(pt);
             personaje->Pintar(pt); 
             if(enemy!= NULL){
                 enemy->Pintar(pt);

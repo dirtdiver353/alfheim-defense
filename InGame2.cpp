@@ -6,7 +6,6 @@
 #include "MenuFinal.h"
 #include "Menu.h"
 #include <iostream>
-#include <stdlib.h>
 
 
 namespace Alfheim
@@ -269,13 +268,27 @@ namespace Alfheim
         }
         void InGame2::Update(float dt)
         {
+            std::vector<sf::Sprite> proyectilSprites = proyectil->GetSprites();
+                       
+            for(int i = 0; i < proyectilSprites.size();i++)
+            {
+                
+                if(!proyectil->IsFirstime(i) && personaje->getPersonaje().getGlobalBounds().contains(proyectilSprites.at(i).getPosition())){
+                    
+                      std::cout << "redu;cir salud de personaje" << std::endl;
+                      proyectil->SetFirstime(i,true);
+                }
+                
+            }
             
-            if(proyectil->GetFuego().getElapsedTime().asSeconds() > ((float)(rand()%600+101)/100)){
+            
+            if(proyectil->GetFuego().getElapsedTime().asSeconds() > proyectil->GetRandom()){
                 
                 proyectil->setFiring(true);
                 proyectil->Spawn(personaje->getPersonaje(),enemy->getEnemigo().getPosition().x, enemy->getEnemigo().getPosition().y);
                 proyectil->setFiring(false); 
                 proyectil->SetFuego();
+                proyectil->SetRandom(((float)(rand()%600+101))/100);
             }
             if(_clock.getElapsedTime().asSeconds() > 1.0){
                 arma->Update(dt); 
@@ -370,9 +383,10 @@ namespace Alfheim
             _datos->ventana.draw(hud->GetTxtMana());
             _datos->ventana.draw(hud->GetTxtPuntos());
             
+            nivel2->PintarBloques(_datos->ventana, pt);
             arma->Pintar(pt);
             proyectil->Pintar(pt);
-            nivel2->PintarBloques(_datos->ventana, pt);
+           
             
             personaje->Pintar(pt); 
             enemy->Pintar(pt);
