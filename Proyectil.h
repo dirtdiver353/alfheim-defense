@@ -43,7 +43,7 @@ namespace Alfheim
         bool firing;
         int animate;
         char dire;
-        float random=((float)(rand()%600+101))/100;
+        float random=((float)(rand()%900+401))/100;
                     
 
     };

@@ -288,7 +288,7 @@ namespace Alfheim
                 proyectil->Spawn(personaje->getPersonaje(),enemy->getEnemigo().getPosition().x, enemy->getEnemigo().getPosition().y);
                 proyectil->setFiring(false); 
                 proyectil->SetFuego();
-                proyectil->SetRandom(((float)(rand()%600+101))/100);
+                proyectil->SetRandom(((float)(rand()%900+401))/100);
             }
             if(_clock.getElapsedTime().asSeconds() > 1.0){
                 arma->Update(dt); 

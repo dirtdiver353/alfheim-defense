@@ -319,7 +319,7 @@ namespace Alfheim
                 proyectil->Spawn(personaje->getPersonaje(),enemy->getEnemigo().getPosition().x, enemy->getEnemigo().getPosition().y);
                 proyectil->setFiring(false); 
                 proyectil->SetFuego();
-                proyectil->SetRandom(((float)(rand()%600+101))/100);
+                proyectil->SetRandom(((float)(rand()%900+401))/100);
             }
             
               std::vector<sf::Sprite> proyectil1Sprites = proyectil1->GetSprites();
@@ -342,7 +342,7 @@ namespace Alfheim
                 proyectil1->Spawn(personaje->getPersonaje(),enemy1->getEnemigo().getPosition().x, enemy1->getEnemigo().getPosition().y);
                 proyectil1->setFiring(false); 
                 proyectil1->SetFuego();
-                proyectil1->SetRandom(((float)(rand()%600+101))/100);
+                proyectil1->SetRandom(((float)(rand()%900+401))/100);
             }
             
                std::vector<sf::Sprite> proyectil2Sprites = proyectil2->GetSprites();
@@ -365,7 +365,7 @@ namespace Alfheim
                 proyectil2->Spawn(personaje->getPersonaje(),enemy2->getEnemigo().getPosition().x, enemy2->getEnemigo().getPosition().y);
                 proyectil2->setFiring(false); 
                 proyectil2->SetFuego();
-                proyectil2->SetRandom(((float)(rand()%600+101))/100);
+                proyectil2->SetRandom(((float)(rand()%900+401))/100);
             }
             
             
