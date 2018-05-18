@@ -15,17 +15,19 @@ namespace Alfheim
        Menu::Menu(DatosJuegoRef datos) : _datos(datos)
        {
            
-            if(!textFont.loadFromFile("resources/fonts/clacon.ttf")
-            || !textFontTitle.loadFromFile("resources/fonts/Morgan TwentyNine.ttf")){
-            // Error en carga de fuente de texto
-            exit(0);
-        
+           if(!textFontTitle.loadFromFile("resources/fonts/Morgan TwentyNine.ttf")){
+            // Error en carga de fuente de texto  
             }
     
+             if(!textFont.loadFromFile("resources/fonts/clacon.ttf")){
+             // Error en carga de fuente de texto 
+             }
+            
     
     
             if (!_backgroundTexture.loadFromFile("resources/inicio2.jpg"))
             {
+                // Error en carga 
                // std::cout << "Error cargando la imagen fondo.png";
                 exit(0);
             }    
@@ -156,7 +158,7 @@ namespace Alfheim
         {
             
         }
-        void Menu::Render(float pt)
+        void Menu::Render(float dt)
         {
                        
             _datos->ventana.clear();

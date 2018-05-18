@@ -19,8 +19,8 @@ namespace Alfheim
         void setBloques();
         Bloque *getBloque(int i);
         void PintarBloques(sf::RenderWindow& window, float pt);
-        void MoverBloques(int i, sf::Sprite personaje);
-        
+        void MoverBloques(int x, int i, sf::Sprite personaje);        
+        int ColisionBloque(int dire);
         bool pisaTrampa(int x, int y);
         
     private:

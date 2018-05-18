@@ -53,7 +53,7 @@ namespace Alfheim
       
       sf::FloatRect recPJ;
       
-     Enemigo *enemy;
+     Enemigo *enemy, *enemy1, *enemy2;
      Pocion *pV1, *pV2, *pV3;
       Pocion *pM1, *pM2, *pM3;
       

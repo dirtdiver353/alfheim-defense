@@ -41,13 +41,49 @@ Bloque *Nivel2::getBloque(int i){
     return this->bloques[i];
 }
 
-void Nivel2::MoverBloques(int i, sf::Sprite personaje){
-     this->getBloque(0)->Girar(i,personaje);
-     this->getBloque(1)->Girar(i,personaje);
-     this->getBloque(2)->Girar(i,personaje);
-     this->getBloque(3)->Girar(i,personaje);
-     this->getBloque(4)->Girar(i,personaje);
-     this->getBloque(5)->Girar(i,personaje);
+int Nivel2::ColisionBloque(int dire){
+  
+  int x = (int)floor(this->getBloque(0)->getBloque().getPosition().x);
+  int y = (int)floor(this->getBloque(0)->getBloque().getPosition().y);
+  
+  if( this->getMapa()->colision2(this->getBloque(0)->getBloque().getGlobalBounds(),x,y,dire)){
+  return 0; }
+   x = (int)floor(this->getBloque(1)->getBloque().getPosition().x);
+   y = (int)floor(this->getBloque(1)->getBloque().getPosition().y);
+  
+  if( this->getMapa()->colision2(this->getBloque(1)->getBloque().getGlobalBounds(),x,y,dire)){
+  return 1; } 
+   x = (int)floor(this->getBloque(2)->getBloque().getPosition().x);
+   y = (int)floor(this->getBloque(2)->getBloque().getPosition().y);
+  
+  if( this->getMapa()->colision2(this->getBloque(2)->getBloque().getGlobalBounds(),x,y,dire)){
+  return 2; }
+   x = (int)floor(this->getBloque(3)->getBloque().getPosition().x);
+   y = (int)floor(this->getBloque(3)->getBloque().getPosition().y);
+  
+  if( this->getMapa()->colision2(this->getBloque(3)->getBloque().getGlobalBounds(),x,y,dire)){
+  return 3; }
+   x = (int)floor(this->getBloque(4)->getBloque().getPosition().x);
+   y = (int)floor(this->getBloque(4)->getBloque().getPosition().y);
+  
+  if( this->getMapa()->colision2(this->getBloque(4)->getBloque().getGlobalBounds(),x,y,dire)){
+  return 4; }
+   x = (int)floor(this->getBloque(5)->getBloque().getPosition().x);
+   y = (int)floor(this->getBloque(5)->getBloque().getPosition().y);
+  
+  if( this->getMapa()->colision2(this->getBloque(5)->getBloque().getGlobalBounds(),x,y,dire)){
+  return 5; }
+  
+  return -1;
+}
+
+void Nivel2::MoverBloques(int x, int i, sf::Sprite personaje){
+     if(x!=0)this->getBloque(0)->Girar(i,personaje);
+     if(x!=1)this->getBloque(1)->Girar(i,personaje);
+     if(x!=2)this->getBloque(2)->Girar(i,personaje);
+     if(x!=3)this->getBloque(3)->Girar(i,personaje);
+     if(x!=4)this->getBloque(4)->Girar(i,personaje);
+     if(x!=5)this->getBloque(5)->Girar(i,personaje);
                                 
 }
 void Nivel2::PintarBloques(sf::RenderWindow& window, float pt){    

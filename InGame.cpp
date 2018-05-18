@@ -49,6 +49,14 @@ namespace Alfheim
             posEnemy.y = 430;
             enemy = new Enemigo(_datos,1,posEnemy,nivel1->getMapa(),1);
             
+            posEnemy.x = 100;
+            posEnemy.y = 80;
+            enemy1 = new Enemigo(_datos,1,posEnemy,nivel1->getMapa(),1);
+            
+            posEnemy.x = 340;
+            posEnemy.y = 260;
+            enemy2 = new Enemigo(_datos,1,posEnemy,nivel1->getMapa(),1);
+            
             /*POCIONES*/
                 posPV = new sf::Vector2f[5];
                 posPV[0].x = 120;
@@ -163,12 +171,7 @@ namespace Alfheim
                             
                                 personaje->Girar(1,xs,ys);
                                 dire = 'r';
-                               
-                                
-                                   nivel1->MoverBloques(nivel1->ColisionBloque(1),1,personaje->getPersonaje()); 
-                                
-                       
-                                
+                               nivel1->MoverBloques(nivel1->ColisionBloque(1),1,personaje->getPersonaje());
                         }
                             
                             
@@ -294,15 +297,7 @@ namespace Alfheim
         }
         void InGame::Update(float dt)
         {
-            std::vector<sf::Sprite> armaSprites = arma->GetSprites();
-            for(int i = 0; i < armaSprites.size();i++)
-            {
-                
-                if(armaSprites.at(i).getGlobalBounds().contains(enemy->getEnemigo().getPosition().x,enemy->getEnemigo().getPosition().y)){
-                    enemy->elimina();
-                      
-                }
-            }
+            
             
             if(_clock.getElapsedTime().asSeconds() > 1.0){
                 arma->Update(dt); 
@@ -319,16 +314,46 @@ namespace Alfheim
             posPJ = personaje->getPosicion();
             
             //IA enemigo
-            enemy->caminar();
-            enemy->detectaPersonaje2(recPJ);
-            enemy->recibeDanyo(arma->GetSprites(), 10);
+            if(enemy != NULL){
+                enemy->caminar();
+                enemy->detectaPersonaje2(recPJ);
+                enemy->recibeDanyo(arma->GetSprites(), 1);
+                
+                if(enemy->compruebaMuerte()){
+                    personaje->setPuntos(personaje->getPuntos()+10);
+                    enemy = NULL;
+                }
+            }
+            
+            if(enemy1!=NULL){
+                enemy1->caminar();
+                enemy1->detectaPersonaje2(recPJ);
+                enemy1->recibeDanyo(arma->GetSprites(), 1);
+                
+                if(enemy1->compruebaMuerte()){
+                    personaje->setPuntos(personaje->getPuntos()+10);
+                    enemy1 = NULL;
+                }
+            }
+            
+            if(enemy2!=NULL){
+                enemy2->caminar();
+                enemy2->detectaPersonaje2(recPJ);
+                enemy2->recibeDanyo(arma->GetSprites(), 1);
+                
+                if(enemy2->compruebaMuerte()){
+                    personaje->setPuntos(personaje->getPuntos()+10);
+                    enemy2 = NULL;
+                }
+            
+            }
             
             /*  CAMBIO ESTADOS DE MENU */
             if( personaje->compruebaMuerte()){
                 _datos->state.AddEJ(JuegoStateRef(new MenuMuerte(_datos,1)),true);
             }
             
-            /* COMPRUEBA SI ENEMIGOS RECIBEN DAÑO */
+            
             
                    
             }
@@ -371,6 +396,7 @@ namespace Alfheim
             
         }
         
+        
         void InGame::Render(float pt)
         {
             _datos->ventana.clear();
@@ -399,7 +425,18 @@ namespace Alfheim
             nivel1->PintarBloques(_datos->ventana, pt);
             
             personaje->Pintar(pt); 
-            enemy->Pintar(pt);
+            if(enemy!= NULL){
+                enemy->Pintar(pt);
+            }
+            
+            if(enemy1!= NULL){
+                enemy1->Pintar(pt);
+            }
+            
+            if(enemy2!= NULL){
+                enemy2->Pintar(pt);
+            }
+                       
             
             
             _datos->ventana.display();

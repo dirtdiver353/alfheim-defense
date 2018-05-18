@@ -13,12 +13,14 @@ namespace Alfheim
 {
     MenuMuerte::MenuMuerte(DatosJuegoRef datos,int n) : _datos(datos) 
     {
-        if(!textFont.loadFromFile("resources/fonts/clacon.ttf")
-            || !textFontTitle.loadFromFile("resources/fonts/Morgan TwentyNine.ttf")){
+        
+           if(!textFontTitle.loadFromFile("resources/fonts/Morgan TwentyNine.ttf")){
             // Error en carga de fuente de texto
-            exit(0);        
-        }
+   
+        
+            }
     
+             if(!textFont.loadFromFile("resources/fonts/clacon.ttf")){}
     
     
         if (!_backgroundTexture.loadFromFile("resources/muerte.jpg"))
@@ -133,7 +135,7 @@ namespace Alfheim
 
     }
     
-    void MenuMuerte::Render(float pt)
+    void MenuMuerte::Render(float dt)
     {
 
         _datos->ventana.clear();

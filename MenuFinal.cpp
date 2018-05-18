@@ -14,12 +14,14 @@ namespace Alfheim
 {
     MenuFinal::MenuFinal(DatosJuegoRef datos) : _datos(datos) 
     {
-        if(!textFont.loadFromFile("resources/fonts/clacon.ttf")
-            || !textFontTitle.loadFromFile("resources/fonts/Morgan TwentyNine.ttf")){
-        // Error en carga de fuente de texto
-        exit(0);
+         
+           if(!textFontTitle.loadFromFile("resources/fonts/Morgan TwentyNine.ttf")){
+            // Error en carga de fuente de texto
+   
         
-    }
+            }
+    
+             if(!textFont.loadFromFile("resources/fonts/clacon.ttf")){}
     
     
     
@@ -136,7 +138,7 @@ namespace Alfheim
 
     }
     
-    void MenuFinal::Render(float pt)
+    void MenuFinal::Render(float dt)
     {
 
         _datos->ventana.clear();

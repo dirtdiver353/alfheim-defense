@@ -8,8 +8,8 @@ Hud::Hud(DatosJuegoRef datos) {
     
      personaje = new Personaje(_datos);
      
-    if(!txtFont.loadFromFile("resources/fonts/clacon.ttf")){
-        
+    if(!txtFont.loadFromFile("OpenSans-Regular.ttf")){
+        std::cerr << "This output is ti to cout\n";
     }
     
    // txtVida = new sf::Text;

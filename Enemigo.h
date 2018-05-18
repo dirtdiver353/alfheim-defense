@@ -10,7 +10,7 @@ class Enemigo {
 public:
     Enemigo(DatosJuegoRef datos,int tipo, sf::Vector2f pos, Mapa* map, int lvl);
     
-    void elimina();
+    
     void setEnemigo(int tipo, sf::Vector2f pos);
     void Pintar(float pt);
     void Update(float dt);
@@ -22,12 +22,12 @@ public:
     bool detectaPersonaje2(sf::FloatRect fr);
     
     bool caminar();
+    bool compruebaMuerte();
+    sf::Sprite getEnemigo() const;
     
-        sf::Sprite getEnemigo() const;
-
     
 private:
-    DatosJuegoRef _datos;
+   DatosJuegoRef _datos;
     sf::Texture _enemigoTexture;
     sf::Sprite _enemigo;
     sf::Clock clock;

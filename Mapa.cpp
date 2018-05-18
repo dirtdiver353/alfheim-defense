@@ -255,19 +255,31 @@ bool Mapa::colision1(sf::FloatRect fr, int x, int y,char d){
         return true;
     else if (y>=_height-1)
         return true;
-        
- if(_tilemapSprite[3][y][x]!=NULL)
+    
+    //para comprobar error segmentation fault
+    /*std::cout << "size" << std::endl;
+    std::cout << sizeof(_tilemapSprite) << std::endl;
+    std::cout << 3 << std::endl;
+    std::cout << sizeof(_tilemapSprite[3]) << std::endl;
+    std::cout << y << std::endl;
+    std::cout << sizeof(_tilemapSprite[3][y]) << std::endl;
+    std::cout << x << std::endl;
+    std::cout << "size" << std::endl;*/
+                                      
+ 
+ // if(x<= sizeof(_tilemapSprite[3][y]))   
+ if(x>=0 && y>=0 && _tilemapSprite[3][y][x]!=NULL)
  {
     if(_tilemapSprite[3][y][x]->getGlobalBounds().intersects(fr))
         choque = true;
  }
     
- if(_tilemapSprite[4][y][x]!=NULL){
+ if(x>=0 && y>=0 && _tilemapSprite[4][y][x]!=NULL){
     if (_tilemapSprite[4][y][x]->getGlobalBounds().intersects(fr))
            choque = true;
  }
     
- if(_tilemapSprite[5][y][x]!=NULL){
+ if(x>=0 && y>=0 && _tilemapSprite[5][y][x]!=NULL){
     if (_tilemapSprite[5][y][x]->getGlobalBounds().intersects(fr))
         choque = true;
  }
@@ -299,13 +311,13 @@ bool Mapa::colision2(sf::FloatRect fr, int x, int y,char d){
         return true;
     else if (y>=_height-1)
         return true;
-        
+ /*       
  if(_tilemapSprite[1][y][x]!=NULL)
  {
     if(_tilemapSprite[1][y][x]->getGlobalBounds().intersects(fr))
         choque = true;
  }
-    
+    */
 
     
     return choque;

@@ -10,6 +10,7 @@
 #include "Enemigo.h"
 #include "Nivel2.h"
 #include "Arma.h"
+#include "Proyectil.h"
 
 
 
@@ -33,7 +34,8 @@ namespace Alfheim
         sf::Texture _backgroundTexture;
         sf::Sprite _background;
         Personaje *personaje;
-         
+        
+        Proyectil *proyectil;
         Arma *arma;
         Nivel2 *nivel2;
         int xd = 0, yd = 0, xu = 0, ys = 0;

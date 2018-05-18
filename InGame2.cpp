@@ -6,7 +6,7 @@
 #include "MenuFinal.h"
 #include "Menu.h"
 #include <iostream>
-
+#include <stdlib.h>
 
 
 namespace Alfheim
@@ -31,6 +31,7 @@ namespace Alfheim
             personaje = new Personaje(_datos);
                       
             arma = new Arma(_datos);
+            proyectil = new Proyectil(_datos);
             
             personaje->setMana(personaje->getMana()+20);
             personaje->setVida(personaje->getVida()+50);
@@ -148,7 +149,7 @@ namespace Alfheim
                             
                                 personaje->Girar(1,xs,ys);
                                 dire = 'r';
-                               nivel2->MoverBloques(1,personaje->getPersonaje());
+                               nivel2->MoverBloques(nivel2->ColisionBloque(1),1,personaje->getPersonaje());
                         }
                             
                             
@@ -180,7 +181,7 @@ namespace Alfheim
                            // if(!nivel2->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(2,xs,ys);
                                 dire = 'l';
-                                 nivel2->MoverBloques(2,personaje->getPersonaje());
+                                 nivel2->MoverBloques(nivel2->ColisionBloque(2),2,personaje->getPersonaje());
                         }
                      }
                         
@@ -209,7 +210,7 @@ namespace Alfheim
                            // if(!nivel2->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(3,xu,yu);
                                 dire = 'u';
-                              nivel2->MoverBloques(3,personaje->getPersonaje());
+                              nivel2->MoverBloques(nivel2->ColisionBloque(3),3,personaje->getPersonaje());
                         }
                      }
                         
@@ -238,7 +239,7 @@ namespace Alfheim
                            // if(!nivel2->getMapa()->colision(posPJ.x,posPJ.y))
                                 personaje->Girar(4,xd,yd);
                                 dire = 'd';
-                                nivel2->MoverBloques(4,personaje->getPersonaje());
+                                nivel2->MoverBloques(nivel2->ColisionBloque(4),4,personaje->getPersonaje());
                         }
                             
                        }
@@ -269,10 +270,16 @@ namespace Alfheim
         void InGame2::Update(float dt)
         {
             
-            
+            if(proyectil->GetFuego().getElapsedTime().asSeconds() > ((float)(rand()%600+101)/100)){
+                
+                proyectil->setFiring(true);
+                proyectil->Spawn(personaje->getPersonaje(),enemy->getEnemigo().getPosition().x, enemy->getEnemigo().getPosition().y);
+                proyectil->setFiring(false); 
+                proyectil->SetFuego();
+            }
             if(_clock.getElapsedTime().asSeconds() > 1.0){
                 arma->Update(dt); 
-                
+                proyectil->Update(dt); 
             }
             
             if(level2 && _clock.getElapsedTime().asSeconds() > 0.05f){
@@ -364,6 +371,7 @@ namespace Alfheim
             _datos->ventana.draw(hud->GetTxtPuntos());
             
             arma->Pintar(pt);
+            proyectil->Pintar(pt);
             nivel2->PintarBloques(_datos->ventana, pt);
             
             personaje->Pintar(pt); 

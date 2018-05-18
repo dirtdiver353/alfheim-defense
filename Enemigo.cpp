@@ -15,6 +15,7 @@
 #include <iostream>
 #include <sstream>
 #define UPDATE_TICK_TIME 1000/15
+
 namespace Alfheim{
     
 Enemigo::Enemigo(DatosJuegoRef datos, int tipo, sf::Vector2f pos, Mapa* map, int lvl) : _datos(datos) {
@@ -26,11 +27,11 @@ Enemigo::Enemigo(DatosJuegoRef datos, int tipo, sf::Vector2f pos, Mapa* map, int
             }    
             
             _enemigo.setTexture(_enemigoTexture);
-            //_enemigo.setScale(0.5,0.5);
+            //_enemigo.setScale(2,2);
              //Le pongo el centroide donde corresponde
              _enemigo.setOrigin(64/2,64/2);
              //Cojo el sprite que me interesa por defecto del sheet
-             _enemigo.setTextureRect(sf::IntRect(0*64, 0*64, 64, 64));
+             _enemigo.setTextureRect(sf::IntRect(0*64, 0*64, 64 ,64));
              //_personaje.setScale(0.75,0.75);
              // Lo dispongo en su posicion en la pantalla
              _enemigo.setPosition(pos.x, pos.y);
@@ -38,9 +39,16 @@ Enemigo::Enemigo(DatosJuegoRef datos, int tipo, sf::Vector2f pos, Mapa* map, int
              mapa = map;
              nivel = lvl;
              // Inicializo contadores de vida, mana y puntos
-             vida = 5;
-             danyo = 1;
+             if(nivel == 1){
+                vida = 50;
+                danyo = 10;
+             } else if (nivel == 2){
+                vida = 100;
+                danyo = 15;
+             }
+             
              ataca = false;
+             muerto = false;
              direccion = rand () % 4;
     
     }else if (tipo == 2){
@@ -49,7 +57,6 @@ Enemigo::Enemigo(DatosJuegoRef datos, int tipo, sf::Vector2f pos, Mapa* map, int
     }
              
 }
-
 bool Enemigo::caminar(){
     bool camina = false;
     sf::FloatRect fr = _enemigo.getGlobalBounds();
@@ -126,6 +133,7 @@ sf::Sprite Enemigo::getEnemigo() const {
             return _enemigo;
         }
 
+
 void Enemigo::Pintar(float pt)
 {
      /* INTERPOLACION DE OBJETO */  
@@ -183,45 +191,22 @@ int Enemigo::getVida(){
     return vida;
 }
 
-void Enemigo::elimina(){
-_enemigo.setTextureRect(sf::IntRect(0, 0, 0, 0));
-}
-
 void Enemigo::recibeDanyo(std::vector<sf::Sprite> sp,int cant){
     
     if(sp.size()!=0){
-    sf::FloatRect fr = sp.at(sp.size()-1).getGlobalBounds();
-    if(_enemigo.getGlobalBounds().intersects(fr)){
-            std::cout << "danyo recibido" << std::endl;
-        
-            vida -=cant;
-        if(vida <= 0){
-            std::cout << "muerto" << std::endl;
-            muerto = true;
-        }
-    
-    }
-    }
-    
-   /* for(unsigned short int i = 0; i < sp.size(); i++){
-        sf::FloatRect fr = sp.at(i).getGlobalBounds();
-        
+        sf::FloatRect fr = sp.at(sp.size()-1).getGlobalBounds();
         if(_enemigo.getGlobalBounds().intersects(fr)){
-            std::cout << "danyo recibido" << std::endl;
-        
-            vida -=cant;
-        if(vida <= 0){
-            std::cout << "muerto" << std::endl;
-            muerto = true;
+                std::cout << "danyo recibido" << std::endl;
+
+                vida -=cant;
+            if(vida <= 0){
+                std::cout << "muerto" << std::endl;
+                muerto = true;
+            }
+
         }
     }
-    } */
-    
-    
-    
-    
-    
-    
+        
 }
 
 bool Enemigo::detectaPersonaje(int xpj, int ypj){
@@ -276,6 +261,10 @@ bool Enemigo::detectaPersonaje2(sf::FloatRect fr){
     }
     
     return detecta;
+}
+
+bool Enemigo::compruebaMuerte(){
+    return muerto;
 }
 
 
